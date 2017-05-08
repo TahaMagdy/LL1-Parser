@@ -21,6 +21,7 @@ public class GrammarManager {
 	
 
 
+// @Taha
 public void grammar() throws FileNotFoundException, IOException {
 
 
@@ -54,22 +55,32 @@ public void grammar() throws FileNotFoundException, IOException {
 	}
 	
 
+
+} // end grammar()
+
+
+
+
+
+
+
+
+
+
+
+// @Yaser
  // a function that return Strings  from sentance split by space  
     public static String[] split(String word) {
         String[] array = word.split("\\s+");
         return array;
     } // End of funcrion 
+// @Yaser
  // a function that return first word in strings 
     public static String returnFirst(String input) {
         int i = input.indexOf(' ');
         String word = input.substring(0, i);
         return word;
     } // End of funcrion
-
-} // end grammar()
-
-
-
 
 
 
