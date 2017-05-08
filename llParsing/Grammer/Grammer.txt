@@ -68,20 +68,35 @@ bin-op : arith-op
        | eq-op 
        | cond-op
 
-arith-op : + | - | * | / | << | >> | %
+arith-op : + 
+| - 
+| * 
+| / 
+| << 
+| >> 
+| %
 
-rel-op : < | > | <= | >=
+rel-op : < 
+| > 
+| <= 
+| >=
 
-eq-op : == | !=
+eq-op : == 
+| !=
 
-cond-op : && | ||
+cond-op : && 
+| ||
 
-constant : intConstant | charConstant | bool-constant
+constant : intConstant 
+| charConstant 
+| bool-constant
 
-bool-constant : true | false
+bool-constant : true 
+| false
 
 require_command : require ( F_name.txt ) ^
 
 F_name : STR
 
-Comment : /- STR -/ | --STR
+Comment : /- STR -/ 
+| --STR
