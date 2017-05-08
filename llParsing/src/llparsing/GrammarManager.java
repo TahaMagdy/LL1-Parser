@@ -59,6 +59,7 @@ public void grammar() throws FileNotFoundException, IOException {
 	}
 	
 
+/* testing
 	// Split keys from rlues
 	int x1  = 0;
 	String[] tokens1 = "Taha | magdy ".split(" | ");
@@ -69,21 +70,27 @@ public void grammar() throws FileNotFoundException, IOException {
 	    System.out.println(token + " __ x = " + x1);
 	    x1++;
 	}
-
+*/
 
 // Filling the hashMap
 int count = 0;
 int flag = 0;
-String[] temp = null;
+String[] temp = new String[2]; // contain nonterminal at [0]
+		      // and rule at [1]
 String[] tokens = null;
+ArrayList rules = new ArrayList();
+String nonTerminal = new String();
 while ( count < fileLines.size() ){
 
 
 	// getting the line
 	String currentLine = fileLines.get(count).toString();
 
+	// Restting flags
 	flag = 0;
-	if ( currentLine.contains(":") ){
+	rules.clear();
+	if ( currentLine.contains(":") )
+	{
 
 		tokens = currentLine.split(":");
 		for (String token : tokens)
@@ -93,19 +100,27 @@ while ( count < fileLines.size() ){
 			    temp[flag] = token;
 			    flag++;
 			}	
+
+		// Picking the non-terminal sympole
+		nonTerminal = temp[0];
+		
+		// Adding the First Rule
+		rules.add(temp[1]);
 			
+		// Adding the rest rules of the non-terminal
+		while (!currentLine.equals("\n")){
+		
+			rules.add( currentLine );
+		}
+
+		// Filling the HashMap
+		hashMap.put(nonTerminal, rules);
+
 
 			
-		} // end :
+	} // end : if
+
 	
-
-
-
-		// TODO
-		// NEED TO FILL THE HASH MAP
-
-
-
 
 
 
