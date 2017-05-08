@@ -20,15 +20,14 @@ import java.util.HashMap;
 public class GrammarManager {
 	
 
-	public HashMap grammarHash = new HashMap();
 	
 
 
 // @Taha
-public void grammar() throws FileNotFoundException, IOException {
+public HashMap<String, ArrayList<String>> grammar() throws FileNotFoundException, IOException {
 
 
-	HashMap<String, ArrayList<String>> hashMap = new HashMap<String, ArrayList<String>>();
+	HashMap<String, ArrayList<String>> hashMap = new HashMap();
       	ArrayList fileLines = new ArrayList();
 
 
@@ -79,13 +78,14 @@ System.out.println("Beginning to fill the HASHMAP...");
 int count = 0;
 int flag = 0;
 String[] temp = new String[2]; // contain nonterminal at [0]
-		      // and rule at [1]
-String[] tokens = null;
-ArrayList rules = new ArrayList();
+			       // and rule at [1]
+String[] tokens = new String[3];
 String nonTerminal = new String();
-while ( count < fileLines.size() ){
 
-			System.out.println("TOP" + count);
+ArrayList<String> rules[] = new ArrayList[100]; // TESTING
+
+int currentNonTeminal = -1;
+while ( count < fileLines.size() ){
 
 
 	// getting the line
@@ -93,68 +93,57 @@ while ( count < fileLines.size() ){
 
 	// Restting flags
 	flag = 0;
-	rules.clear();
 	if ( currentLine.contains(":") )
 	{
+		currentNonTeminal ++;
 
 		tokens = currentLine.split(":");
 		for (String token : tokens)
 			{
-			    if (token.equals("|"))
-				    continue; // x will not increase
+			    if ( token.equals(":") )
+				    continue;
 			    temp[flag] = token;
 			    flag++;
-			System.out.println("TOKEN " + count);
+			    System.out.println( ">>>>>TOKENS "+ temp[0] + " " + temp[1]);
 			}	
 
 		// Picking the non-terminal sympole
 		nonTerminal = temp[0];
-		
-		// Adding the First Rule
-		rules.add(temp[1]);
+		rules[currentNonTeminal] = new ArrayList();
+		rules[currentNonTeminal].add(temp[1]); // r1
+	} else {
+
+
+		if ( currentLine.contains("|") )
+		{
+			rules[currentNonTeminal].add(currentLine);
+
+		} else if ( currentLine.equals("\n") ){
+
+			hashMap.put(nonTerminal, rules[currentNonTeminal]);
 			
-		System.out.println("Before the last while " + count);
-		// Adding the rest rules of the non-terminal
-		if (!currentLine.equals("\n")){
-		
-			rules.add( currentLine );
-		System.out.println("LAST WHILE " + count);
 		}
 
-		// Filling the HashMap
-		hashMap.put(nonTerminal, rules);
-		System.out.println("LAST " + count);
+	}
 
 
-			
-	} // end : if
 
 	
 
-count ++;
 
-
-
-
-
-		
+	
+count++; // Get the next line
 	} // end while filling
 
 
 
 
 // testing hashmap
+    System.out.println("OUT: > " + hashMap );
 
 
 
-
-this.grammarHash = hashMap;
-
-
-
-
-
-
+return hashMap;
 } // end grammar()
 
 

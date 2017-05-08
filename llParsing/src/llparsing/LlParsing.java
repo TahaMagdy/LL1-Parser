@@ -28,7 +28,7 @@ public static void main(String[] args) throws IOException {
 
 
 	// 29 non-terminal symbol
-	System.out.println(m.grammarHash.size());
+	//System.out.println(m.grammarHash.size());
 	
 
 /* TESTING HASHMAP
@@ -41,7 +41,17 @@ public static void main(String[] args) throws IOException {
 	System.out.println(hashMap);
 */
 
+/*
+	String[] ar = {"Taha", "Magdy", "Abu-Allah"};
 
+	ArrayList<String> rules[] = new ArrayList[100];
+
+	rules[0] = new ArrayList();
+	rules[0].add("oo");
+
+*/
+
+	
 
 
 
