@@ -118,6 +118,7 @@ while ( count < fileLines.size() ){
 
 		if ( currentLine.contains("|") )
 		{
+			// Remove "|" char
 			StringBuilder removed = new StringBuilder(currentLine);
 			removed.deleteCharAt(0);
 
