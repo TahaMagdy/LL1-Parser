@@ -6,6 +6,8 @@
 package llparsing;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -29,6 +31,15 @@ public static void main(String[] args) throws IOException {
 	System.out.println(m.grammarHash.size());
 	
 
+/* TESTING HASHMAP
+	HashMap<String, ArrayList<String>> hashMap = new HashMap<String, ArrayList<String>>();
+	ArrayList ar = new ArrayList();
+
+	ar.add("A");
+	ar.add("B");
+	hashMap.put("First", ar);
+	System.out.println(hashMap);
+*/
 
 
 
