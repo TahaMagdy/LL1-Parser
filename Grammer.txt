@@ -1,25 +1,26 @@
-Program : Start-Symbols{Comment^Program
-	| require_command^Program 
-	| AccessModifiers -Type# id { field-decl ^method-decl }}End-Symbols
+Program : Start-Symbols { Comment ^ Program
+	| require_command ^ Program 
+	| AccessModifiers-Type # id { field-decl ^ method-decl } } End-Symbols
 
 Start-Symbols : @
 
 End-Symbols : $
+
 AccessModifiers-Type : public 
 		     | Private
+									
+field-decl : type # id , field-decl 			      
+	   | type # id [ intConst ] 				
+	   | type # id = constant				
+	   | type # id						
 
-field-decl : type#id, field-decl 
-	   | type#id [ intConst ] 
-	   | type# id = constant
-	   | type#id
+method-decl : type # id ( field-decl 
+	    | em ) block
 
-method-decl : type#id (field-decl 
-	    | em) block
+block : { var-decl ^ statement }
 
-block : { var-decl ^statement }
-
-var-decl : var-decl ,type# id 
-	 | type# id
+var-decl : var-decl , type # id 
+	 | type # id
 
 type : Ity
      | Sity
@@ -29,38 +30,38 @@ type : Ity
      | Valueless 
      | Logical
 
-Statement : assign^ 
- 	  | method-call^
-	  | TrueFor-Stmt^
+Statement : assign ^ 
+ 	  | method-call ^
+	  | TrueFor-Stmt ^
 	  | Whatever-Stmt ^
 	  | Respondwith-Stmt
 
-assign : L-value = expr^
+assign : L-value = expr ^
 
 <L –value> : id
-	   | id[ expr ]
+	   | id [ expr ]
 
-method-call : id( method-arg )^
+method-call : id ( method-arg ) ^
 
 method-arg : expr 
 	   | em
 
-TrueFor-Stmt : TrueFor (expr) Statement Else Statement
+TrueFor-Stmt : TrueFor ( expr ) Statement Else Statement
 
-Whatever-Stmt : Whatever (expr) Statement
+Whatever-Stmt : Whatever ( expr ) Statement
 
-Respondwith-Stmt : BackedValue#Expression ^ 
-		 | BackedValue #ID^
+Respondwith-Stmt : BackedValue # Expression ^ 
+		 | BackedValue # id ^
 
 terminatethis _Statement : TerminateThisNow;
 
 expr : id 
-     | id [ expr] 
+     | id [ expr ] 
      | method-call 
      | constant 
      | expr bin-op expr 
-     | !expr 
-     | ( expr)
+     | ! expr 
+     | ( expr )
 
 bin-op : arith-op 
        | rel-op 
@@ -79,7 +80,7 @@ constant : intConstant | charConstant | bool-constant
 
 bool-constant : true | false
 
-require_command : require(F_name.txt)^
+require_command : require ( F_name.txt ) ^
 
 F_name : STR
 
