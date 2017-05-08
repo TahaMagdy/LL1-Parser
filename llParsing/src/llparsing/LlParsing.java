@@ -5,10 +5,15 @@
  */
 package llparsing;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Set;
 
- /**
+/**
  *
  * @author moroclash
  */
@@ -18,33 +23,23 @@ public class LlParsing {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-		HashMap<String,ArrayList<String>> Grammer = new HashMap<>();
-		ArrayList<String> arr = new ArrayList<>();
-		arr.add("test");
-		Grammer.put("program", arr);
-		omar(Grammer);
+		omar();
 	}
+
 	
-	
-	
-	/**
-	 * @moroclash
-	 * this function Take Grammar to delete Left Factoring 
-	 * 
-	 * @param Grammer : this is a Grammar  
-	 */
-	public static void omar(HashMap<String,ArrayList<String>> Grammer) {
-		//this to loop on all non terminal to delete left factoring
-		Grammer.forEach((nonTerminal,rules)->{
-			//loob on all Probabilty Rules 
-			rules.forEach(rule->{
-			
-			
-			
-			
-			
-			});//end of Rules loop		
-		});//end of NonTerminal Loop
+	public static void omar() {
+		LinkedHashMap<String,ArrayList<String>> gram= new LinkedHashMap<>();
+		ArrayList<String> t1 = new ArrayList<>();
+		t1.add("l m A");
+		t1.add("l m");
+		t1.add("l z");
+		gram.put("A", t1);
 		
+	
+	
+		AmbegoutyManager.deletLeftFactoring(gram);
+		
+		gram.forEach((key,value)->{System.out.println(key);System.out.print("->");value.forEach(e->{System.out.println(e);});System.out.println("********************************");});
 	}
+	
 }
