@@ -118,7 +118,10 @@ while ( count < fileLines.size() ){
 
 		if ( currentLine.contains("|") )
 		{
-			rules[currentNonTeminal].add(currentLine);
+			StringBuilder removed = new StringBuilder(currentLine);
+			removed.deleteCharAt(0);
+
+			rules[currentNonTeminal].add(removed.toString());
 
 		} else if ( currentLine.equals("\n") ){
 
