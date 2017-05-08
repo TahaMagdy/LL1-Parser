@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -25,7 +26,8 @@ public class GrammarManager {
 public void grammar() throws FileNotFoundException, IOException {
 
 
-      ArrayList fileLines = new ArrayList();
+	HashMap<String, ArrayList<String>> hashMap = new HashMap<String, ArrayList<String>>();
+      	ArrayList fileLines = new ArrayList();
 
 
       // Reading lines
@@ -56,6 +58,21 @@ public void grammar() throws FileNotFoundException, IOException {
 		x++;
 	}
 	
+
+	// Split keys from rlues
+	String[] tokens1 = "Taha | magdy ".split(" | ");
+	for (String token : tokens1)
+	{
+	    System.out.println(token);
+	}
+
+
+	int count = 0;
+	while ( count < fileLines.size() ){
+
+		String[] tokens = fileLines.get(x).toString().split("|");
+		count ++;
+	}
 
 
 } // end grammar()
