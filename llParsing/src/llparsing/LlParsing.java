@@ -32,8 +32,13 @@ public class LlParsing {
 	 */
 	public static void main(String[] args) throws IOException {
 
+		LinkedHashMap<String, ArrayList<String>> hashMap = new LinkedHashMap();
+
 		GrammarManager x = new GrammarManager();
-			x.grammar();
+		hashMap =  (LinkedHashMap<String, ArrayList<String>>) x.grammar();
+		hashMap.forEach((key,value)->{System.out.println("key :  "+ key);value.forEach(e->{System.out.println("   value   :  " +e);});});
+//                AmbegoutyManager.RemoveLeftReqursion(hashMap);
+                  //        AmbegoutyManager.deletLeftFactoring(hashMap);
 
 	}
 
