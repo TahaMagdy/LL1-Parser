@@ -5,13 +5,13 @@
  */
 package llparsing;
 
-<<<<<<< HEAD
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-||||||| merged common ancestors
+
 import java.io.IOException;
-=======
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Set;
->>>>>>> b55235e64c718f4b0563ff3d27d042e3be137c87
+
 
 /**
  *
@@ -30,21 +30,19 @@ public class LlParsing {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
-		omar();
+	public static void main(String[] args) throws IOException {
+
+		GrammarManager x = new GrammarManager();
+			x.grammar();
+
 	}
 
 
-<<<<<<< HEAD
+
 	// 29 non-terminal symbol
 	//System.out.println(m.grammarHash.size());
-||||||| merged common ancestors
+
 	// 29 non-terminal symbol
-	System.out.println(m.grammarHash.size());
-=======
->>>>>>> b55235e64c718f4b0563ff3d27d042e3be137c87
-	
-<<<<<<< HEAD
 
 /* TESTING HASHMAP
 	HashMap<String, ArrayList<String>> hashMap = new HashMap<String, ArrayList<String>>();
@@ -70,30 +68,7 @@ public class LlParsing {
 
 
 
-
-
-
-
-
-
-
-	} // end main
-||||||| merged common ancestors
-
-
-
-
-
-
-
-
-
-
-
-
-
-	} // end main
-=======
+/*
 	public static void omar() {
 		LinkedHashMap<String,ArrayList<String>> gram= new LinkedHashMap<>();
 		ArrayList<String> t1 = new ArrayList<>();
@@ -108,6 +83,25 @@ public class LlParsing {
 		
 		gram.forEach((key,value)->{System.out.println(key);System.out.print("->");value.forEach(e->{System.out.println(e);});System.out.println("********************************");});
 	}
->>>>>>> b55235e64c718f4b0563ff3d27d042e3be137c87
+*/
+
+
+
+
+
+
+
+
+	} // end class
+
+
+
+
+
+
+
+
+
+
+
 	
-}

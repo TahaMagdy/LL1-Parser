@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  *
@@ -27,7 +28,7 @@ public class GrammarManager {
 public HashMap<String, ArrayList<String>> grammar() throws FileNotFoundException, IOException {
 
 
-	HashMap<String, ArrayList<String>> hashMap = new HashMap();
+	LinkedHashMap<String, ArrayList<String>> hashMap = new LinkedHashMap();
       	ArrayList fileLines = new ArrayList();
 
 
