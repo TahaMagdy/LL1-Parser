@@ -26,6 +26,7 @@ public class LlParsing {
 		omar();
 	}
 
+
 	
 	public static void omar() {
 		LinkedHashMap<String,ArrayList<String>> gram= new LinkedHashMap<>();
