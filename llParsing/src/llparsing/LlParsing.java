@@ -21,12 +21,11 @@ public static void main(String[] args) throws IOException {
 
 
 
-	GrammarManager x = new GrammarManager();
-	//x.grammar();
+	GrammarManager m = new GrammarManager();
+	m.grammar();
 
 
 	
-
 
 
 

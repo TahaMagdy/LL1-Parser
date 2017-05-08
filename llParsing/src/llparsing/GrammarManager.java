@@ -46,12 +46,12 @@ public void grammar() throws FileNotFoundException, IOException {
 		} 
 		fileReader.close();
 		System.out.println("Contents of file:");
-		//System.out.println(stringBuffer.toString());
+		System.out.println(stringBuffer.toString());
 	} catch (IOException e) {
 		e.printStackTrace();
 	}
 
-	// Testing
+	// Testing lines array
 	int x = 0;
 	while ( x < fileLines.size() ){
 		System.out.print(fileLines.get(x));
@@ -60,10 +60,14 @@ public void grammar() throws FileNotFoundException, IOException {
 	
 
 	// Split keys from rlues
+	int x1  = 0;
 	String[] tokens1 = "Taha | magdy ".split(" | ");
 	for (String token : tokens1)
 	{
-	    System.out.println(token);
+	    if (token.equals("|"))
+		    continue; // x will not increase
+	    System.out.println(token + " __ x = " + x1);
+	    x1++;
 	}
 
 
