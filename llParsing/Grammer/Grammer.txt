@@ -1,73 +1,81 @@
 Program : Start-Symbols { Comment ^ Program
-	| require_command ^ Program 
-	| AccessModifiers-Type # id { field-decl ^ method-decl } } End-Symbols
+| require_command ^ Program 
+| AccessModifiers-Type # id { field-decl ^ method-decl } } End-Symbols
 
 Start-Symbols : @
 
 End-Symbols : $
 
 AccessModifiers-Type : public 
+<<<<<<< HEAD
 		     | Private
 
 
+||||||| merged common ancestors
+		     | Private
+									
+=======
+| Private
+            
+>>>>>>> e794763098ff1defc7b714c1664d8a1a67d26e20
 field-decl : type # id , field-decl 			      
-	   | type # id [ intConst ] 				
-	   | type # id = constant				
-	   | type # id						
+| type # id [ intConst ] 				
+| type # id = constant				
+| type # id						
 
 method-decl : type # id ( field-decl 
-	    | em ) block
+| em ) block
 
 block : { var-decl ^ statement }
 
 var-decl : var-decl , type # id 
-	 | type # id
+| type # id
 
 type : Ity
-     | Sity
-     | CwqSequence
-     | Ifity
-     | Sifity
-     | Valueless 
-     | Logical
+| Sity
+| CwqSequence
+| Ifity
+| Sifity
+| Valueless 
+| Logical
 
 Statement : assign ^ 
- 	  | method-call ^
-	  | TrueFor-Stmt ^
-	  | Whatever-Stmt ^
-	  | Respondwith-Stmt
+| method-call ^
+| TrueFor-Stmt ^
+| Whatever-Stmt ^
+| Respondwith-Stmt
 
 assign : L-value = expr ^
 
 <L –value> : id
-	   | id [ expr ]
+| id [ expr ]
 
 method-call : id ( method-arg ) ^
 
 method-arg : expr 
-	   | em
+| em
 
 TrueFor-Stmt : TrueFor ( expr ) Statement Else Statement
 
 Whatever-Stmt : Whatever ( expr ) Statement
 
 Respondwith-Stmt : BackedValue # Expression ^ 
-		 | BackedValue # id ^
+| BackedValue # id ^
 
 terminatethis _Statement : TerminateThisNow;
 
 expr : id 
-     | id [ expr ] 
-     | method-call 
-     | constant 
-     | expr bin-op expr 
-     | ! expr 
-     | ( expr )
+| id [ expr ] 
+| method-call 
+| constant 
+| expr bin-op expr 
+| ! expr 
+| ( expr )
 
 bin-op : arith-op 
-       | rel-op 
-       | eq-op 
-       | cond-op
+| rel-op 
+| eq-op 
+| cond-op
 
 arith-op : + 
 | - 
