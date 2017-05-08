@@ -26,7 +26,7 @@ public class GrammarManager {
 
 
 // @Taha
-public HashMap<String, ArrayList<String>> grammar() throws FileNotFoundException, IOException {
+public LinkedHashMap<String, ArrayList<String>> grammar() throws FileNotFoundException, IOException {
 
 
 	LinkedHashMap<String, ArrayList<String>> hashMap = new LinkedHashMap();
