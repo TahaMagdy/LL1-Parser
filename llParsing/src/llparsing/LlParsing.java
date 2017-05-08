@@ -37,14 +37,16 @@ public class LlParsing {
 		//this to loop on all non terminal to delete left factoring
 		Grammer.forEach((nonTerminal,rules)->{
 			//loob on all Probabilty Rules 
-//			rules.forEach(action);
-		
-		
-		
-		
-		
-		});
+			rules.forEach(rule->{
+			
+			
+			
+			
+			
+			});//end of Rules loop		
+		});//end of NonTerminal Loop
 		
 	}
+
 	
 }
