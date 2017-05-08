@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -182,7 +183,15 @@ this.grammarHash = hashMap;
     } // End of funcrion
 
 
-
-
+    /**
+     * remove first  exe from rule
+     * @param rule : this is a rule that will remove the first  
+     * @return String of rule without first
+     */
+    public static String removeFirestExe(String rule)
+    {
+	    String []SplitRule = split(rule);
+	    return  String.join(" ", Arrays.copyOfRange(SplitRule, 1,SplitRule.length));
+    }
 
 } // end GrammarManager

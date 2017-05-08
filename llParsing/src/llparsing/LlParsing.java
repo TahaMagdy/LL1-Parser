@@ -31,15 +31,25 @@ public class LlParsing {
 	public static void omar() {
 		LinkedHashMap<String,ArrayList<String>> gram= new LinkedHashMap<>();
 		ArrayList<String> t1 = new ArrayList<>();
-		t1.add("l m A");
-		t1.add("l m");
+		t1.add("n m l");
+		t1.add("A m");
 		t1.add("l z");
+		
+		
 		gram.put("A", t1);
 		
+	/**
+	 *		A ->  A m 
+	 *		    | A m 
+	 *		    | l z 
+	 * 
+	 *		
+	 * 
+	 */
 	
-	
-		AmbegoutyManager.deletLeftFactoring(gram);
-		
+		AmbegoutyManager.RemoveLeftReqursion(gram);
+//		AmbegoutyManager.deletLeftFactoring(gram);
+//		System.out.println(GrammarManager.removeFirestExe(t1.get(0)));
 		gram.forEach((key,value)->{System.out.println(key);System.out.print("->");value.forEach(e->{System.out.println(e);});System.out.println("********************************");});
 	}
 	

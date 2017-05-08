@@ -23,10 +23,9 @@ public class AmbegoutyManager {
 	private static int exeNum = 0;
 	private static int NonterminalDashNum = 1;
 	private static String NonterminalDashName = "X";
-	
-	private static String getname()
-	{
-		String name = NonterminalDashName+NonterminalDashNum;
+
+	private static String getname() {
+		String name = NonterminalDashName + NonterminalDashNum;
 		NonterminalDashNum++;
 		return name;
 	}
@@ -83,7 +82,7 @@ public class AmbegoutyManager {
 				//this have the final position of rules that have same exe's
 				HashSet<Integer> OreginalRulePosition = new HashSet<>();
 				//this loop to check if Rules position have the same exe in another lvl's
-				while (rulePosition.size() > 1 ) {
+				while (rulePosition.size() > 1) {
 					minExeNum = 1000;
 					//have  List of Postion that have the same exe only
 					ArrayList<String[]> spli = new ArrayList<>();
@@ -103,7 +102,7 @@ public class AmbegoutyManager {
 						//copy it in anther Place
 						OreginalRulePosition = new HashSet<>(rulePosition);
 					}
-										//increase Search lvl to check other lvl of exe
+					//increase Search lvl to check other lvl of exe
 					position++;
 					//check if lvl is >= minExeNum to Avoid OutOfBoud Exciption
 					if (position >= minExeNum) {
@@ -115,9 +114,9 @@ public class AmbegoutyManager {
 					if (OreginalRulePosition.size() == rulePosition.size()) //increase final lvl of have same
 					{
 						increasExeNum();
-					}
-					else
+					} else {
 						break;
+					}
 				}
 				//check if have more than one rule have left factoring
 				if (OreginalRulePosition.size() > 1) {
@@ -136,12 +135,13 @@ public class AmbegoutyManager {
 						//remove non repeated exe's from rules
 						String[] PostExe = Arrays.copyOfRange(AnotherExe, getExeNum(), AnotherExe.length);
 						String PostString = String.join(" ", PostExe);
-						if(PostExe.length==0)
+						if (PostExe.length == 0) {
 							PostString = "epslon";
+						}
 						//add it to new Rules list
 						subExe.add(PostString);
 						//remove this rule form original grammar
-						Grammer.get(nonTerminal).remove(Posit-minus);
+						Grammer.get(nonTerminal).remove(Posit - minus);
 						minus++;
 					}
 					//add new rule in Original Rules array
@@ -217,6 +217,43 @@ public class AmbegoutyManager {
 		}
 		//return final poditions
 		return rulesNumber;
+	}
+
+	/**
+	 * this function use to remove left recursion
+	 *
+	 * @param Grammer : this is grammar where will remove Left recursion
+	 */
+	public static void RemoveLeftReqursion(LinkedHashMap<String, ArrayList<String>> Grammer) {
+		//loop on all nonTerminal rules to remove lef recusrion
+		for(Map.Entry<String, ArrayList<String>> map:Grammer.entrySet())
+		{
+			String nonteminal = map.getKey();
+			ArrayList<String> rules = map.getValue();
+			//name of new nonTerminal
+			String name = getname();
+			boolean flage = false;
+			ArrayList<String> Newrules= new ArrayList<>();
+			int min=0,size=rules.size();
+			//loop on all rules
+			for (int i = 0; i < size; i++) {
+				String rule = rules.get(i-min);
+				if (nonteminal.compareTo(GrammarManager.returnFirst(rule)) == 0) {
+					Newrules.add(GrammarManager.removeFirestExe(rule)+" "+name);
+					rules.remove(i-min);
+					min++;
+					flage = true;
+				}
+			}
+			if (flage) {
+				for (int i = 0; i < rules.size(); i++) {
+					rules.set(i, rules.get(i) +" "+ name);
+				}
+			}
+			Newrules.add("epslon");
+			Grammer.put(name, Newrules);
+		}
+
 	}
 
 }

@@ -8,7 +8,8 @@ End-Symbols : $
 
 AccessModifiers-Type : public 
 		     | Private
-									
+
+
 field-decl : type # id , field-decl 			      
 	   | type # id [ intConst ] 				
 	   | type # id = constant				
