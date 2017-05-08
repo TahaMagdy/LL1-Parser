@@ -35,12 +35,13 @@ public void grammar() throws FileNotFoundException, IOException {
 		BufferedReader bufferedReader = new BufferedReader(fileReader);
 		StringBuilder stringBuffer = new StringBuilder();
 		String line;
+		// a BufferReader takes only one line at a time
 		while ((line = bufferedReader.readLine()) != null) {
 			stringBuffer.append(line);
 			stringBuffer.append("\n");
 			fileLines.add(line);
 			fileLines.add("\n");
-		}
+		} 
 		fileReader.close();
 		System.out.println("Contents of file:");
 		//System.out.println(stringBuffer.toString());
@@ -48,6 +49,7 @@ public void grammar() throws FileNotFoundException, IOException {
 		e.printStackTrace();
 	}
 
+	// Testing
 	int x = 0;
 	while ( x < fileLines.size() ){
 		System.out.print(fileLines.get(x));
