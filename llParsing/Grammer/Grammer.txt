@@ -1,34 +1,26 @@
 Program : Start-Symbols { Comment ^ Program
-| require_command ^ Program 
+| require_command ^ Program
 | AccessModifiers-Type # id { field-decl ^ method-decl } } End-Symbols
 
 Start-Symbols : @
 
 End-Symbols : $
 
-AccessModifiers-Type : public 
-<<<<<<< HEAD
-		     | Private
-
-
-||||||| merged common ancestors
-		     | Private
-									
-=======
+AccessModifiers-Type : public
 | Private
-            
->>>>>>> e794763098ff1defc7b714c1664d8a1a67d26e20
-field-decl : type # id , field-decl 			      
-| type # id [ intConst ] 				
-| type # id = constant				
-| type # id						
 
-method-decl : type # id ( field-decl 
+
+field-decl : type # id , field-decl
+| type # id [ intConst ]
+| type # id = constant
+| type # id
+
+method-decl : type # id ( field-decl
 | em ) block
 
 block : { var-decl ^ statement }
 
-var-decl : var-decl , type # id 
+var-decl : var-decl , type # id
 | type # id
 
 type : Ity
@@ -36,10 +28,10 @@ type : Ity
 | CwqSequence
 | Ifity
 | Sifity
-| Valueless 
+| Valueless
 | Logical
 
-Statement : assign ^ 
+Statement : assign ^
 | method-call ^
 | TrueFor-Stmt ^
 | Whatever-Stmt ^
@@ -52,60 +44,60 @@ assign : L-value = expr ^
 
 method-call : id ( method-arg ) ^
 
-method-arg : expr 
+method-arg : expr
 | em
 
 TrueFor-Stmt : TrueFor ( expr ) Statement Else Statement
 
 Whatever-Stmt : Whatever ( expr ) Statement
 
-Respondwith-Stmt : BackedValue # Expression ^ 
+Respondwith-Stmt : BackedValue # Expression ^
 | BackedValue # id ^
 
 terminatethis _Statement : TerminateThisNow;
 
-expr : id 
-| id [ expr ] 
-| method-call 
-| constant 
-| expr bin-op expr 
-| ! expr 
+expr : id
+| id [ expr ]
+| method-call
+| constant
+| expr bin-op expr
+| ! expr
 | ( expr )
 
-bin-op : arith-op 
-| rel-op 
-| eq-op 
+bin-op : arith-op
+| rel-op
+| eq-op
 | cond-op
 
-arith-op : + 
-| - 
-| * 
-| / 
-| << 
-| >> 
+arith-op : +
+| -
+| *
+| /
+| <<
+| >>
 | %
 
-rel-op : < 
-| > 
-| <= 
+rel-op : <
+| >
+| <=
 | >=
 
-eq-op : == 
+eq-op : ==
 | !=
 
-cond-op : && 
+cond-op : &&
 | ||
 
-constant : intConstant 
-| charConstant 
+constant : intConstant
+| charConstant
 | bool-constant
 
-bool-constant : true 
+bool-constant : true
 | false
 
 require_command : require ( F_name.txt ) ^
 
 F_name : STR
 
-Comment : /- STR -/ 
+Comment : /- STR -/
 | --STR
