@@ -5,15 +5,22 @@
  */
 package llparsing;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.HashMap;
 
+||||||| merged common ancestors
+=======
+import java.io.IOException;
+
+>>>>>>> 7eeeb213d6d87ab9ceac8094c2f5163f5071461c
 /**
  *
  * @author moroclash
  */
 public class LlParsing {
 
+<<<<<<< HEAD
 	/**
 	 * @param args the command line arguments
 	 */
@@ -47,6 +54,56 @@ public class LlParsing {
 		});//end of NonTerminal Loop
 		
 	}
+||||||| merged common ancestors
+	/**
+	 * @param args the command line arguments
+	 */
+	public static void main(String[] args) {
+=======
+/**
+ * @param args the command line arguments
+ */
+public static void main(String[] args) throws IOException {
 
+>>>>>>> 7eeeb213d6d87ab9ceac8094c2f5163f5071461c
+
+<<<<<<< HEAD
+||||||| merged common ancestors
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	} // end main
+=======
+
+
+	GrammarManager x = new GrammarManager();
+	x.grammar();
+
+
+
+
+
+
+
+
+
+
+
+
+
+	} // end main
+>>>>>>> 7eeeb213d6d87ab9ceac8094c2f5163f5071461c
 	
 }
