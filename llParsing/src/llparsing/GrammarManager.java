@@ -71,12 +71,64 @@ public void grammar() throws FileNotFoundException, IOException {
 	}
 
 
-	int count = 0;
-	while ( count < fileLines.size() ){
+// Filling the hashMap
+int count = 0;
+int flag = 0;
+String[] temp = null;
+String[] tokens = null;
+while ( count < fileLines.size() ){
 
-		String[] tokens = fileLines.get(x).toString().split("|");
+
+	// getting the line
+	String currentLine = fileLines.get(count).toString();
+
+	flag = 0;
+	if ( currentLine.contains(":") ){
+
+		tokens = currentLine.split(":");
+		for (String token : tokens)
+			{
+			    if (token.equals("|"))
+				    continue; // x will not increase
+			    temp[flag] = token;
+			    flag++;
+			}	
+			
+
+			
+		} // end :
+	
+
+
+
+		// TODO
+		// NEED TO FILL THE HASH MAP
+
+
+
+
+
+
+
+
+
+
+		
 		count ++;
-	}
+	} // end while filling
+
+
+
+
+// testing hashmap
+
+
+
+
+
+
+
+
 
 
 } // end grammar()

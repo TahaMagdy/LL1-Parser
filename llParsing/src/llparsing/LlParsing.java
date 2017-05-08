@@ -22,12 +22,20 @@ public static void main(String[] args) throws IOException {
 
 
 	GrammarManager m = new GrammarManager();
-	m.grammar();
+	//m.grammar();
 
 
 	
 
-
+	int x1  = 0;
+	String[] tokens1 = "Taha | magdy ".split(" | ");
+	for (String token : tokens1)
+	{
+	    if (token.equals("|"))
+		    continue; // x will not increase
+	    System.out.println(token + " __ x = " + x1);
+	    x1++;
+	}
 
 
 
