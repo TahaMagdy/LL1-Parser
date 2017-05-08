@@ -19,6 +19,8 @@ import java.util.HashMap;
  */
 public class GrammarManager {
 	
+
+	public HashMap grammarHash = new HashMap();
 	
 
 
@@ -73,6 +75,7 @@ public void grammar() throws FileNotFoundException, IOException {
 */
 
 // Filling the hashMap
+System.out.println("Beginning to fill the HASHMAP...");
 int count = 0;
 int flag = 0;
 String[] temp = new String[2]; // contain nonterminal at [0]
@@ -81,6 +84,8 @@ String[] tokens = null;
 ArrayList rules = new ArrayList();
 String nonTerminal = new String();
 while ( count < fileLines.size() ){
+
+			System.out.println("TOP" + count);
 
 
 	// getting the line
@@ -99,6 +104,7 @@ while ( count < fileLines.size() ){
 				    continue; // x will not increase
 			    temp[flag] = token;
 			    flag++;
+			System.out.println("TOKEN " + count);
 			}	
 
 		// Picking the non-terminal sympole
@@ -107,14 +113,17 @@ while ( count < fileLines.size() ){
 		// Adding the First Rule
 		rules.add(temp[1]);
 			
+		System.out.println("Before the last while " + count);
 		// Adding the rest rules of the non-terminal
-		while (!currentLine.equals("\n")){
+		if (!currentLine.equals("\n")){
 		
 			rules.add( currentLine );
+		System.out.println("LAST WHILE " + count);
 		}
 
 		// Filling the HashMap
 		hashMap.put(nonTerminal, rules);
+		System.out.println("LAST " + count);
 
 
 			
@@ -122,14 +131,13 @@ while ( count < fileLines.size() ){
 
 	
 
-
+count ++;
 
 
 
 
 
 		
-		count ++;
 	} // end while filling
 
 
@@ -140,6 +148,7 @@ while ( count < fileLines.size() ){
 
 
 
+this.grammarHash = hashMap;
 
 
 

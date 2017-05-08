@@ -25,6 +25,8 @@ public static void main(String[] args) throws IOException {
 	m.grammar();
 
 
+	System.out.println(m.grammarHash);
+
 
 
 
