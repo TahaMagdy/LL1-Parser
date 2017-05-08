@@ -5,9 +5,12 @@
  */
 package llparsing;
 
-import java.io.FileInputStream;
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,25 +18,41 @@ import java.io.IOException;
  */
 public class GrammarManager {
 	
+	
 
 
 public void grammar() throws FileNotFoundException, IOException {
 
-	FileInputStream file = null;
 
-      try {
-         file = new FileInputStream("Grammer/Grammer.txt");
-         
-         int c;
-         while ((c = file.read()) != -1) {
-		System.out.print(c);
-         }
-      }finally {
-         if (file != null) {
-            file.close();
-         }
-      } // end finally
+      ArrayList fileLines = new ArrayList();
 
+
+      // Reading lines
+	try {
+		File file = new File("Grammer/Grammer.txt");
+		FileReader fileReader = new FileReader(file);
+		BufferedReader bufferedReader = new BufferedReader(fileReader);
+		StringBuilder stringBuffer = new StringBuilder();
+		String line;
+		while ((line = bufferedReader.readLine()) != null) {
+			stringBuffer.append(line);
+			stringBuffer.append("\n");
+			fileLines.add(line);
+			fileLines.add("\n");
+		}
+		fileReader.close();
+		System.out.println("Contents of file:");
+		//System.out.println(stringBuffer.toString());
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+
+	int x = 0;
+	while ( x < fileLines.size() ){
+		System.out.print(fileLines.get(x));
+		x++;
+	}
+	
 
 
 

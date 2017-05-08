@@ -5,19 +5,24 @@
  */
 package llparsing;
 
+import java.io.IOException;
+
 /**
  *
  * @author moroclash
  */
 public class LlParsing {
 
-	/**
-	 * @param args the command line arguments
-	 */
-	public static void main(String[] args) {
+/**
+ * @param args the command line arguments
+ */
+public static void main(String[] args) throws IOException {
 
 
 
+
+	GrammarManager x = new GrammarManager();
+	x.grammar();
 
 
 
