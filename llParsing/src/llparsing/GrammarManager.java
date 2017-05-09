@@ -122,6 +122,7 @@ while ( count < fileLines.size() ){
 			String cleaned = currentLine.
 				replaceAll("(\\s\\|\\s)|(\\|)|(\\|\\s)|(\\s\\|)", 
 					"");
+			cleaned = cleaned.trim();
 			rules[currentNonTeminal].add(cleaned);
 
 		} else if ( currentLine.equals("\n") ){
