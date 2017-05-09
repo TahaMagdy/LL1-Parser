@@ -112,6 +112,7 @@ while ( count < fileLines.size() ){
 		// Picking the non-terminal sympole
 		nonTerminal = temp[0];
 		rules[currentNonTeminal] = new ArrayList();
+		temp[1] = temp[1].trim();
 		rules[currentNonTeminal].add(temp[1]); // r1
 	} else {
 
