@@ -212,7 +212,7 @@ public class AmbegoutyManager {
 			for (int i = 0; i < rules.size(); i++) {
 				if (arr[i] == max) {
 					rulesNumber.add(i);
-				}
+				}	
 			}
 		}
 		//return final poditions
@@ -238,6 +238,7 @@ public class AmbegoutyManager {
 			//loop on all rules
 			for (int i = 0; i < size; i++) {
 				String rule = rules.get(i-min);
+				System.out.println("none  :" +nonteminal + "    rule : "+GrammarManager.returnFirst(rule));
 				if (nonteminal.compareTo(GrammarManager.returnFirst(rule)) == 0) {
 					Newrules.add(GrammarManager.removeFirestExe(rule)+" "+name);
 					rules.remove(i-min);
@@ -249,9 +250,9 @@ public class AmbegoutyManager {
 				for (int i = 0; i < rules.size(); i++) {
 					rules.set(i, rules.get(i) +" "+ name);
 				}
+				Newrules.add("epslon");
+				Grammer.put(name, Newrules);
 			}
-			Newrules.add("epslon");
-			Grammer.put(name, Newrules);
 		}
 
 	}
