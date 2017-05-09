@@ -191,20 +191,20 @@ public void parsingTable( LinkedHashMap<String, ArrayList<String>> first,
 
 
 	
-	// This will contain all symbols
-	Set set = new HashSet();
-	// Getting all symbols (Terminals&NonTerminals)
-	for (String key : first.keySet()) {
+// This will contain all symbols
+Set set = new HashSet();
+// Getting all symbols (Terminals&NonTerminals)
+for (String key : first.keySet()) {
 
-		for (int x = 0; x < first.get(key).size(); x++ ){
+	for (int x = 0; x < first.get(key).size(); x++ ){
 
-			// Adding every element in the rule
-			// into a set
-			set.add(first.get(key).get(x));
-		}
-		// Adding the left hand non-terminal
-		set.add(key);
-	} // end filling the set.
+		// Adding every element in the rule
+		// into a set
+		set.add(first.get(key).get(x));
+	}
+	// Adding the left hand non-terminal
+	set.add(key);
+} // end filling the set.
 
 // System.out.println(set);
 
@@ -230,6 +230,21 @@ Set nonTerminalSet = new HashSet();
 
 //System.out.println("nonTerminals ->" + nonTerminalSet );
 //System.out.println("terminals ->" + set);
+
+
+
+// * Building the parsing table
+int tableRows = nonTerminalSet.size();
+int tableColm = set.size();
+
+
+
+
+
+
+
+
+
 
 
 } // end parsingTable()

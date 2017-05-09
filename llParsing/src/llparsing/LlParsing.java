@@ -32,7 +32,12 @@ public class LlParsing {
 	 */
 	public static void main(String[] args) throws IOException {
 
-		LinkedHashMap<String, ArrayList<String>> hashMap = new LinkedHashMap();
+		LinkedHashMap<String, ArrayList<String>> fisrt = new LinkedHashMap();
+		LinkedHashMap<String, ArrayList<String>> follow = new LinkedHashMap();
+		ArrayList rules = new ArrayList();
+
+		GrammarManager x = new GrammarManager();
+		x.parsingTable(fisrt, follow, rules);
 
 
 
