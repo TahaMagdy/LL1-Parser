@@ -41,6 +41,7 @@ public class LlParsing {
 		hashMap.forEach((key,value)->{System.out.println("key :  "+ key);value.forEach(e->{System.out.println("   value   :  " +e);});});
 
 
+
 	}
 
 

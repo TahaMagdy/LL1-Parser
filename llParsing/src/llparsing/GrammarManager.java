@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.Set;
 
 /**
  *
@@ -134,7 +136,7 @@ while ( count < fileLines.size() ){
 			
 		}
 
-	}
+	} // end else
 
 
 
@@ -163,7 +165,72 @@ return hashMap;
 
 
 
+// @Taha
+// takes unambiguous rules
+public void parsingTable( LinkedHashMap<String, ArrayList<String>> first,
+			  LinkedHashMap<String, ArrayList<String>> follow,
+			  ArrayList<String> rules ) 
+{
 
+	// FOR TESTING ONLEY
+	ArrayList<String> ar1 = new ArrayList();
+	ar1.add("(");
+	ar1.add("id");
+	ar1.add("E`");
+	ArrayList<String> ar2 = new ArrayList();
+	ar2.add("*");
+	ar2.add("+");
+	ar2.add("id");
+
+
+	first.put("E", ar1 );
+	first.put("F", ar2 );
+	// FOR TESTING ONLEY
+
+
+
+
+	
+	// This will contain all symbols
+	Set set = new HashSet();
+	// Getting all symbols (Terminals&NonTerminals)
+	for (String key : first.keySet()) {
+
+		for (int x = 0; x < first.get(key).size(); x++ ){
+
+			// Adding every element in the rule
+			// into a set
+			set.add(first.get(key).get(x));
+		}
+		// Adding the left hand non-terminal
+		set.add(key);
+	} // end filling the set.
+
+// System.out.println(set);
+
+
+
+
+
+
+
+
+} // end parsingTable
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
 
 
 // @Yaser
@@ -196,6 +263,7 @@ return hashMap;
      * @param rule : this is a rule that will remove the first  
      * @return String of rule without first
      */
+    // @Yaser
     public static String removeFirestExe(String rule)
     {
 	    String []SplitRule = split(rule);
