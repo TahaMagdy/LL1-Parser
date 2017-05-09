@@ -238,7 +238,7 @@ public class AmbegoutyManager {
 			//loop on all rules
 			for (int i = 0; i < size; i++) {
 				String rule = rules.get(i-min);
-				System.out.println("none  :" +nonteminal + "    rule : "+GrammarManager.returnFirst(rule));
+				System.out.println("none  :" +nonteminal + "    rule :"+GrammarManager.returnFirst(rule));
 				if (nonteminal.compareTo(GrammarManager.returnFirst(rule)) == 0) {
 					Newrules.add(GrammarManager.removeFirestExe(rule)+" "+name);
 					rules.remove(i-min);
