@@ -126,6 +126,8 @@ while ( count < fileLines.size() ){
 
 		} else if ( currentLine.equals("\n") ){
 
+
+			nonTerminal = nonTerminal.trim();
 			hashMap.put(nonTerminal, rules[currentNonTeminal]);
 			
 		}
