@@ -259,11 +259,21 @@ Set nonTerminalSet = new HashSet();
 // @Yaser
  // a function that return first word in strings 
     public static String returnFirst(String input) {
-        int i = input.indexOf(' ');
-        String word = input.substring(0, i);
-        return word;
-    } // End of funcrion
+    String result = input;  // if no space found later, input is the first word
 
+    for(int i = 0; i < input.length(); i++)
+    {
+        if(input.charAt(i) == ' ')
+        {
+            result = input.substring(0, i);
+            break;
+        }
+    }
+
+    return result;
+    } // End of funcrion
+    
+    
 
     /**
      * remove first  exe from rule

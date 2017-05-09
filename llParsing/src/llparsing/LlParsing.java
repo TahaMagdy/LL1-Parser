@@ -32,13 +32,15 @@ public class LlParsing {
 	 */
 	public static void main(String[] args) throws IOException {
 
-		LinkedHashMap<String, ArrayList<String>> first = new LinkedHashMap();
-		LinkedHashMap<String, ArrayList<String>> follow = new LinkedHashMap();
-		ArrayList rules = new ArrayList();
+		LinkedHashMap<String, ArrayList<String>> hashMap = new LinkedHashMap();
 
 		GrammarManager x = new GrammarManager();
-		//x.grammar();
-		x.parsingTable(first, follow, rules);
+		hashMap =  (LinkedHashMap<String, ArrayList<String>>) x.grammar();
+                AmbegoutyManager.RemoveLeftReqursion(hashMap);
+		AmbegoutyManager.deletLeftFactoring(hashMap);
+		hashMap.forEach((key,value)->{System.out.println("key :  "+ key);value.forEach(e->{System.out.println("   value   :  " +e);});});
+
+
 
 	}
 
@@ -83,6 +85,9 @@ public class LlParsing {
 		
 		
 		gram.put("A", t1);
+		gram.put("z", t1);
+		gram.put("b", t1);
+		gram.put("s", t1);
 		
 	/**
 	 *		A ->  A m 
