@@ -176,7 +176,7 @@ return hashMap;
 // What is epsilon?! 
 public void parsingTable( LinkedHashMap<String, ArrayList<String>> first,
 			  LinkedHashMap<String, ArrayList<String>> follow,
-			  ArrayList<String> rules ) 
+			  LinkedHashMap<String, ArrayList<String>>  rules ) 
 {
 
 	// FOR TESTING ONLEY
@@ -188,14 +188,20 @@ public void parsingTable( LinkedHashMap<String, ArrayList<String>> first,
 	ar2.add("*");
 	ar2.add("+");
 	ar2.add("id");
-
-
 	first.put("E", ar1 );
 	first.put("F", ar2 );
 
+	ArrayList eRule = new ArrayList();
+	eRule.add("T E`");
+	ArrayList e2Rule = new ArrayList();
+	e2Rule.add("+ T E`");
+	e2Rule.add("em");
+	rules.put("E", eRule);
+	rules.put("E`", e2Rule);
 
-	rules.add("E -> T E`");
-	rules.add("E' -> + T E` | ");
+	
+
+
 	// FOR TESTING ONLEY
 
 
@@ -249,12 +255,14 @@ LinkedHashMap<String, Integer> indicesOfNonTerminal_Columns = new LinkedHashMap(
 LinkedHashMap<String, Integer> indicesOfTerminal_Rows = new LinkedHashMap();
 
 
+// Building indices controllers
 Iterator<String> iteratorTerminal = set.iterator();
 int index = 0;
 while ( iteratorTerminal.hasNext() ){
 	indicesOfNonTerminal_Columns.put( iteratorTerminal.next(), index);
 	index++;
 }
+indicesOfNonTerminal_Columns.put("$", index); // adding $ to the terminals
 Iterator<String> iteratorNonTerminal = nonTerminalSet.iterator();
 index = 0;
 while ( iteratorNonTerminal.hasNext() ){
@@ -273,10 +281,55 @@ int tableRows = nonTerminalSet.size();
 int tableColm = set.size();
 
 
-
-
 //int[ ][ ] a = new int[2][4];  // Two rows and four columns.
 String[][] parsingTable = new String[tableRows][tableColm];
+
+
+
+// Filling the Pasring Table
+// Loop Over the hole grammar (nonTerminals)
+String firstSymbol = "";
+int firstCount = 0;
+char letter = 0;
+int innerWhile = 0;
+for (String currentNonTerminal: rules.keySet()) {
+
+// rules.get(currentNonTerminal) is a list of the rules for the currenNonTerminal System.out.println( currentNonTerminal + " -- " + rules.get(currentNonTerminal));
+
+	// Looping over the nonTerminal rules
+	for (int i = 0; i < rules.get(currentNonTerminal).size(); i++)
+	{
+
+
+		// if the rule is epsilon
+		if (rules.get(currentNonTerminal).get(i).equals("em")){
+
+		} else {
+
+		// 1* getting the first symbol
+		while (letter != ' '){
+			letter = rules.get(currentNonTerminal).get(i).charAt(innerWhile);
+			firstSymbol += letter;
+			firstCount ++;
+			innerWhile++;
+
+		} // Now we have got the firstSybol
+//System.out.println("First Symbol "+ firstSymbol);
+
+
+
+
+
+
+
+		}
+
+
+
+	} // end nonTerminal rules 
+
+} // end NonTerminals
+
 
 
 

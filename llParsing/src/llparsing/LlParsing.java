@@ -34,12 +34,19 @@ public class LlParsing {
 
 		LinkedHashMap<String, ArrayList<String>> fisrt = new LinkedHashMap();
 		LinkedHashMap<String, ArrayList<String>> follow = new LinkedHashMap();
-		ArrayList rules = new ArrayList();
+		LinkedHashMap<String, ArrayList<String>> rules = new LinkedHashMap();
 
 		GrammarManager x = new GrammarManager();
+//		x.grammar();
 		x.parsingTable(fisrt, follow, rules);
 
 
+		/*
+		char letter = 0;
+		if ( letter != ' '){
+			System.out.println("بيس");
+		}
+		*/
 
 		/*
 		GrammarManager x = new GrammarManager();
