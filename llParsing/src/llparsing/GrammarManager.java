@@ -176,7 +176,7 @@ public void parsingTable( LinkedHashMap<String, ArrayList<String>> first,
 	ArrayList<String> ar1 = new ArrayList();
 	ar1.add("(");
 	ar1.add("id");
-	ar1.add("E`");
+	ar1.add("name");
 	ArrayList<String> ar2 = new ArrayList();
 	ar2.add("*");
 	ar2.add("+");
@@ -210,12 +210,29 @@ public void parsingTable( LinkedHashMap<String, ArrayList<String>> first,
 
 
 
+// After these two loops.
+// nonTerminalSet will contains all non-terminals ONLY
+// set will contain terminals ONLY
+// * the First Only have noterminals on the left hand side
+// * put all symbols in a set
+// * AllSet - Fisrt = Terminals
+Set nonTerminalSet = new HashSet();
+	for (String key : first.keySet()) {
+
+		for (int x = 0; x < first.get(key).size(); x++ ){
+
+			if ( set.contains(key)) {
+				set.remove(key);
+				nonTerminalSet.add(key);
+			}
+		}
+	}  // end separating terminals and non-terminals
+
+//System.out.println("nonTerminals ->" + nonTerminalSet );
+//System.out.println("terminals ->" + set);
 
 
-
-
-
-} // end parsingTable
+} // end parsingTable()
 
 
 
