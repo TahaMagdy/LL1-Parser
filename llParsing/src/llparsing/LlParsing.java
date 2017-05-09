@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Set;
+import java.util.Stack;
 
 
 /**
@@ -38,9 +39,13 @@ public class LlParsing {
 		hashMap =  (LinkedHashMap<String, ArrayList<String>>) x.grammar();
                 AmbegoutyManager.RemoveLeftReqursion(hashMap);
 		AmbegoutyManager.deletLeftFactoring(hashMap);
-		hashMap.forEach((key,value)->{System.out.println("key :  "+ key);value.forEach(e->{System.out.println("   value   :  " +e);});});
-
-
+//		hashMap.forEach((key,value)->{System.out.println("key :  "+ key);value.forEach(e->{System.out.println("   value   :  " +e);});});
+		
+		
+		 
+					String []exeS = {"t1","t2","t3","t4"};
+					for(int i=exeS.length-1;i>=0;i--)
+						System.out.println(exeS[i]);
 
 	}
 

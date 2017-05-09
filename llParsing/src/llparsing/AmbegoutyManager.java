@@ -139,7 +139,7 @@ public class AmbegoutyManager {
 						String[] PostExe = Arrays.copyOfRange(AnotherExe, getExeNum(), AnotherExe.length);
 						String PostString = String.join(" ", PostExe);
 						if (PostExe.length == 0) {
-							PostString = "epslon";
+							PostString = "em";
 						}
 						//add it to new Rules list
 						subExe.add(PostString);
