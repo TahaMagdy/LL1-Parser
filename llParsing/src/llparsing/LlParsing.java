@@ -36,10 +36,9 @@ public class LlParsing {
 
 		GrammarManager x = new GrammarManager();
 		hashMap =  (LinkedHashMap<String, ArrayList<String>>) x.grammar();
-		
                 AmbegoutyManager.RemoveLeftReqursion(hashMap);
-		hashMap.forEach((key,value)->{System.out.println("key :  *"+ key+"*");value.forEach(e->{System.out.println("   value   :  *" +e+"*");});});
-                  //        AmbegoutyManager.deletLeftFactoring(hashMap);
+		AmbegoutyManager.deletLeftFactoring(hashMap);
+		hashMap.forEach((key,value)->{System.out.println("key :  "+ key);value.forEach(e->{System.out.println("   value   :  " +e);});});
 
 
 	}
@@ -85,6 +84,9 @@ public class LlParsing {
 		
 		
 		gram.put("A", t1);
+		gram.put("z", t1);
+		gram.put("b", t1);
+		gram.put("s", t1);
 		
 	/**
 	 *		A ->  A m 

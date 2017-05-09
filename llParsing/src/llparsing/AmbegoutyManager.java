@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -50,6 +52,7 @@ public class AmbegoutyManager {
 	 * Complexity : worse -> N^4 best -> N^3 log(n)
 	 */
 	public static void deletLeftFactoring(LinkedHashMap<String, ArrayList<String>> Grammer) {
+		LinkedHashMap<String, ArrayList<String>> GrammerNew = new LinkedHashMap<>();
 		//this to loop on all non terminal to delete left factoring
 		for (Map.Entry<String, ArrayList<String>> Nonterminal : Grammer.entrySet()) {
 			String nonTerminal = Nonterminal.getKey();
@@ -150,10 +153,11 @@ public class AmbegoutyManager {
 					//add new nonTerminal in Original Grammar
 					newSubGram.put(name, subExe);
 					deletLeftFactoring(newSubGram);
-					Grammer.putAll(newSubGram);
+					GrammerNew.putAll(newSubGram);
 				}
 			}//end of condition of nonTerminal have one rule
 		}//end of NonTerminal Loop
+		Grammer.putAll(GrammerNew);
 	}
 
 	/**
@@ -212,7 +216,7 @@ public class AmbegoutyManager {
 			for (int i = 0; i < rules.size(); i++) {
 				if (arr[i] == max) {
 					rulesNumber.add(i);
-				}	
+				}
 			}
 		}
 		//return final poditions
@@ -225,36 +229,35 @@ public class AmbegoutyManager {
 	 * @param Grammer : this is grammar where will remove Left recursion
 	 */
 	public static void RemoveLeftReqursion(LinkedHashMap<String, ArrayList<String>> Grammer) {
+		LinkedHashMap<String, ArrayList<String>> Grammernew = new LinkedHashMap<>();
 		//loop on all nonTerminal rules to remove lef recusrion
-		for(Map.Entry<String, ArrayList<String>> map:Grammer.entrySet())
-		{
+		for (Map.Entry<String, ArrayList<String>> map : Grammer.entrySet()) {
 			String nonteminal = map.getKey();
 			ArrayList<String> rules = map.getValue();
 			//name of new nonTerminal
 			String name = getname();
 			boolean flage = false;
-			ArrayList<String> Newrules= new ArrayList<>();
-			int min=0,size=rules.size();
+			ArrayList<String> Newrules = new ArrayList<>();
+			int min = 0, size = rules.size();
 			//loop on all rules
 			for (int i = 0; i < size; i++) {
-				String rule = rules.get(i-min);
-				System.out.println("none  :" +nonteminal + "    rule :"+GrammarManager.returnFirst(rule));
+				String rule = rules.get(i - min);
 				if (nonteminal.compareTo(GrammarManager.returnFirst(rule)) == 0) {
-					Newrules.add(GrammarManager.removeFirestExe(rule)+" "+name);
-					rules.remove(i-min);
+					Newrules.add(GrammarManager.removeFirestExe(rule) + " " + name);
+					rules.remove(i - min);
 					min++;
 					flage = true;
 				}
 			}
 			if (flage) {
 				for (int i = 0; i < rules.size(); i++) {
-					rules.set(i, rules.get(i) +" "+ name);
+					rules.set(i, rules.get(i) + " " + name);
 				}
 				Newrules.add("epslon");
-				Grammer.put(name, Newrules);
+				Grammernew.put(name, Newrules);
 			}
 		}
-
+		Grammer.putAll(Grammernew);
 	}
 
 }
