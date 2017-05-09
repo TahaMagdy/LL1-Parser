@@ -33,7 +33,7 @@ public class LlParsing {
 	public static void main(String[] args) throws IOException {
 
 		GrammarManager x = new GrammarManager();
-		x.grammar();
+			x.grammar();
 
 	}
 

@@ -48,8 +48,8 @@ public LinkedHashMap<String, ArrayList<String>> grammar() throws FileNotFoundExc
 			fileLines.add("\n");
 		} 
 		fileReader.close();
-		System.out.println("Contents of file:");
-		System.out.println(stringBuffer.toString());
+//		System.out.println("Contents of file:");
+//		System.out.println(stringBuffer.toString());
 	} catch (IOException e) {
 		e.printStackTrace();
 	}
@@ -57,7 +57,7 @@ public LinkedHashMap<String, ArrayList<String>> grammar() throws FileNotFoundExc
 	// Testing lines array
 	int x = 0;
 	while ( x < fileLines.size() ){
-		System.out.print(fileLines.get(x));
+//		System.out.print(fileLines.get(x));
 		x++;
 	}
 	
@@ -76,7 +76,7 @@ public LinkedHashMap<String, ArrayList<String>> grammar() throws FileNotFoundExc
 */
 
 // Filling the hashMap
-System.out.println("Beginning to fill the HASHMAP...");
+//System.out.println("Beginning to fill the HASHMAP...");
 int count = 0;
 int flag = 0;
 String[] temp = new String[2]; // contain nonterminal at [0]
@@ -106,7 +106,7 @@ while ( count < fileLines.size() ){
 				    continue;
 			    temp[flag] = token;
 			    flag++;
-			    System.out.println( ">>>>>TOKENS "+ temp[0] + " " + temp[1]);
+//			    System.out.println( ">>>>>TOKENS "+ temp[0] + " " + temp[1]);
 			}	
 
 		// Picking the non-terminal sympole
@@ -118,11 +118,11 @@ while ( count < fileLines.size() ){
 
 		if ( currentLine.contains("|") )
 		{
-			// Remove "|" char
-			StringBuilder removed = new StringBuilder(currentLine);
-			removed.deleteCharAt(0);
-
-			rules[currentNonTeminal].add(removed.toString());
+			// Remove " | " chars
+			String cleaned = currentLine.
+				replaceAll("(\\s\\|\\s)|(\\|)|(\\|\\s)|(\\s\\|)", 
+					"");
+			rules[currentNonTeminal].add(cleaned);
 
 		} else if ( currentLine.equals("\n") ){
 
@@ -145,7 +145,7 @@ count++; // Get the next line
 
 
 // testing hashmap
-    System.out.println("OUT: > " + hashMap );
+//    System.out.println("OUT: > " + hashMap );
 
 
 
