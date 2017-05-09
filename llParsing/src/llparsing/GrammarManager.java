@@ -14,8 +14,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Set;
+import javax.swing.text.html.HTMLDocument;
 
 /**
  *
@@ -166,7 +168,12 @@ return hashMap;
 
 
 // @Taha
-// takes unambiguous rules
+// takes 
+// 1* first,  LinkedHashMap of (key is non-terminal, value is arraylist of rule symbol)
+// 2* follow, LinkedHashMap of (key is non-terminal, value is arraylist of rule symbol)
+// 3* unambiguous rules
+// 
+// What is epsilon?! 
 public void parsingTable( LinkedHashMap<String, ArrayList<String>> first,
 			  LinkedHashMap<String, ArrayList<String>> follow,
 			  ArrayList<String> rules ) 
@@ -185,6 +192,10 @@ public void parsingTable( LinkedHashMap<String, ArrayList<String>> first,
 
 	first.put("E", ar1 );
 	first.put("F", ar2 );
+
+
+	rules.add("E -> T E`");
+	rules.add("E' -> + T E` | ");
 	// FOR TESTING ONLEY
 
 
@@ -228,8 +239,32 @@ Set nonTerminalSet = new HashSet();
 		}
 	}  // end separating terminals and non-terminals
 
-//System.out.println("nonTerminals ->" + nonTerminalSet );
-//System.out.println("terminals ->" + set);
+System.out.println("nonTerminals (Raws)->" + nonTerminalSet );
+System.out.println("terminals    (Coln)->" + set);
+
+
+// These two are used to control the assigning in the parsing table
+// maps a (terminal/nonterminal) to an index
+LinkedHashMap<String, Integer> indicesOfNonTerminal_Columns = new LinkedHashMap();
+LinkedHashMap<String, Integer> indicesOfTerminal_Rows = new LinkedHashMap();
+
+
+Iterator<String> iteratorTerminal = set.iterator();
+int index = 0;
+while ( iteratorTerminal.hasNext() ){
+	indicesOfNonTerminal_Columns.put( iteratorTerminal.next(), index);
+	index++;
+}
+Iterator<String> iteratorNonTerminal = nonTerminalSet.iterator();
+index = 0;
+while ( iteratorNonTerminal.hasNext() ){
+	indicesOfTerminal_Rows.put( iteratorNonTerminal.next(), index);
+	index++;
+}
+
+System.out.println(indicesOfTerminal_Rows);
+System.out.println(indicesOfNonTerminal_Columns);
+
 
 
 
@@ -238,6 +273,10 @@ int tableRows = nonTerminalSet.size();
 int tableColm = set.size();
 
 
+
+
+//int[ ][ ] a = new int[2][4];  // Two rows and four columns.
+String[][] parsingTable = new String[tableRows][tableColm];
 
 
 
