@@ -24,9 +24,9 @@ public class test {
 	 * @return : return LinkedHashMap that have Key : is a Nonterminal ,
 	 * value : is a First Array
 	 */
-	public static LinkedHashMap<String, ArrayList<String>> getFirest(LinkedHashMap<String, ArrayList<String>> grammar) {
+	public static LinkedHashMap<String, HashSet<String>> getFirest(LinkedHashMap<String, ArrayList<String>> grammar) {
 		//this is LinkedHashMap that will returned and it is now empty
-		LinkedHashMap<String, ArrayList<String>> Returnfirst = new LinkedHashMap<>();
+		LinkedHashMap<String, HashSet<String>> Returnfirst = new LinkedHashMap<>();
 		//loop on all nonTerminals
 		for (Map.Entry<String, ArrayList<String>> map : grammar.entrySet()) {
 			//get nonTerminal name
@@ -34,7 +34,7 @@ public class test {
 			//check if we get his firest before 
 			if (!Returnfirst.containsKey(nonTerminal)) {
 				//if not get his firests and put it in Returnfirst using this helpper function
-				Fires(grammar, nonTerminal, new ArrayList<String>(), Returnfirst);
+				Fires(grammar, nonTerminal, new HashSet<String>(), Returnfirst);
 			}
 		}
 		//return LinkedHashMap
@@ -53,10 +53,10 @@ public class test {
 	 * @param ruleFirest : this is Original rules that get First before
 	 * @return :return ArrayList that have First of nonTerminal
 	 */
-	private static ArrayList<String> Fires(LinkedHashMap<String, ArrayList<String>> grammar,
+	private static HashSet<String> Fires(LinkedHashMap<String, ArrayList<String>> grammar,
 		String nonTerminal,
-		ArrayList<String> firets,
-		LinkedHashMap<String, ArrayList<String>> ruleFirest) {
+		HashSet<String> firets,
+		LinkedHashMap<String, HashSet<String>> ruleFirest) {
 		//this is a List of nonTerminal Rules
 		ArrayList<String> rules = grammar.get(nonTerminal);
 		//this will have First exe to every Rule
@@ -74,7 +74,7 @@ public class test {
 			{
 				if (!ruleFirest.containsKey(firestExe)) {
 					//if not ... get his firests
-					firets.addAll(Fires(grammar, firestExe, new ArrayList<String>(), ruleFirest));
+					firets.addAll(Fires(grammar, firestExe, new HashSet<String>(), ruleFirest));
 				}
 			}
 		}
@@ -91,7 +91,7 @@ public class test {
 	 * @return : return LinkedHashMap that have Key : is a Nonterminal ,
 	 * value : is a Follow Array
 	 */
-	public static LinkedHashMap<String, HashSet<String>> getFollow(LinkedHashMap<String, ArrayList<String>> firests,
+	public static LinkedHashMap<String, HashSet<String>> getFollow(LinkedHashMap<String, HashSet<String>> firests,
 		LinkedHashMap<String, ArrayList<String>> grammar) {
 		//this is a LinkedHashMap that will returned
 		LinkedHashMap<String, HashSet<String>> returnFollows = new LinkedHashMap<>();
@@ -103,7 +103,7 @@ public class test {
 		returnFollows.put(firstNonTerminal, firestFollow);
 		follow(firstNonTerminal, returnFollows, firestFollow, grammar, firests);
 		//loop on alll nonTerminal to get follow for every one
-		for (Map.Entry<String, ArrayList<String>> map : firests.entrySet()) {
+		for (Map.Entry<String, HashSet<String>> map : firests.entrySet()) {
 			if (!returnFollows.containsKey(map.getKey())) {
 				follow(map.getKey(), returnFollows, new HashSet<String>(), grammar, firests);
 			}
@@ -116,7 +116,7 @@ public class test {
 		LinkedHashMap<String, HashSet<String>> returnFollows,
 		HashSet<String> follow,
 		LinkedHashMap<String, ArrayList<String>> grammar,
-		LinkedHashMap<String, ArrayList<String>> firests) {
+		LinkedHashMap<String, HashSet<String>> firests) {
 		ArrayList<String[]> nonTerminalPosition = getNonTerminalPositions(grammar, nonTerminal);
 		for (String[] value : nonTerminalPosition) {
 			if (value[1].compareTo("0") == 0) {

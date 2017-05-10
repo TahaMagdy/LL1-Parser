@@ -33,9 +33,8 @@ public class LlParsing {
 	 */
 	public static void main(String[] args) throws IOException {
 
-		LinkedHashMap<String, ArrayList<String>> hashMap = new LinkedHashMap(),first;
-		LinkedHashMap<String, HashSet<String>> follow = new LinkedHashMap();
-
+		LinkedHashMap<String, ArrayList<String>> hashMap = new LinkedHashMap();
+		LinkedHashMap<String, HashSet<String>> follow = new LinkedHashMap(),first;
 //		GrammarManager x = new GrammarManager();
 //		hashMap =  (LinkedHashMap<String, ArrayList<String>>) x.grammar();
 //                AmbegoutyManager.RemoveLeftReqursion(hashMap);
