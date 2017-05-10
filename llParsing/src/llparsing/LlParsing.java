@@ -41,6 +41,18 @@ public class LlParsing {
 		x.parsingTable(fisrt, follow, rules);
 
 
+		
+		//System.out.println(GrammarManager.returnFirst("E` New"));
+
+
+/*
+		String[] s = GrammarManager.split("+ id");
+		for (int i = 0; i < s.length; i++){
+
+			System.out.println(s[i]);
+		}
+*/
+		
 		/*
 		char letter = 0;
 		if ( letter != ' '){
