@@ -174,7 +174,7 @@ return hashMap;
 // 3* unambiguous rules
 // 
 // What is epsilon?! 
-public void parsingTable( LinkedHashMap<String, ArrayList<String>> first,
+public static void parsingTable( LinkedHashMap<String, ArrayList<String>> first,
 			  LinkedHashMap<String, ArrayList<String>> follow,
 			  LinkedHashMap<String, ArrayList<String>>  rules ) 
 {

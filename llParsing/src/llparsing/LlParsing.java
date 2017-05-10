@@ -35,36 +35,37 @@ public class LlParsing {
 
 		LinkedHashMap<String, ArrayList<String>> hashMap = new LinkedHashMap();
 		LinkedHashMap<String, HashSet<String>> follow = new LinkedHashMap(),first;
-//		GrammarManager x = new GrammarManager();
-//		hashMap =  (LinkedHashMap<String, ArrayList<String>>) x.grammar();
-//                AmbegoutyManager.RemoveLeftReqursion(hashMap);
-//		AmbegoutyManager.deletLeftFactoring(hashMap);
-//		hashMap.forEach((key,value)->{System.out.println("key :  "+ key);value.forEach(e->{System.out.println("   value   :  " +e);});});
+		GrammarManager x = new GrammarManager();
+		hashMap =  (LinkedHashMap<String, ArrayList<String>>) x.grammar();
+                AmbegoutyManager.RemoveLeftReqursion(hashMap);
+		AmbegoutyManager.deletLeftFactoring(hashMap);
+		hashMap.forEach((key,value)->{System.out.println("key :  "+ key);value.forEach(e->{System.out.println("   value   :  " +e);});});
 		
-		ArrayList<String> t1 =  new ArrayList<>();
-		t1.add("t ex");
-		ArrayList<String> t2 =  new ArrayList<>();
-		t2.add("+ t ex");
-		t2.add("em");
-		ArrayList<String> t3 =  new ArrayList<>();
-		t3.add("f tx");
-		ArrayList<String> t4 =  new ArrayList<>();
-		t4.add("* f tx");
-		t4.add("em");
-		ArrayList<String> t5 =  new ArrayList<>();
-		t5.add("id");
-		t5.add("( e )");
+//		ArrayList<String> t1 =  new ArrayList<>();
+//		t1.add("t ex");
+//		ArrayList<String> t2 =  new ArrayList<>();
+//		t2.add("+ t ex");
+//		t2.add("em");
+//		ArrayList<String> t3 =  new ArrayList<>();
+//		t3.add("f tx");
+//		ArrayList<String> t4 =  new ArrayList<>();
+//		t4.add("* f tx");
+//		t4.add("em");
+//		ArrayList<String> t5 =  new ArrayList<>();
+//		t5.add("id");
+//		t5.add("( e )");
+//		
+//		
+//		
+//		hashMap.put("e", t1);
+//		hashMap.put("ex", t2);
+//		hashMap.put("t", t3);
+//		hashMap.put("tx", t4);
+//		hashMap.put("f", t5);
 		
+		first = Firest_Follow.getFirest(hashMap);//FlowFirst.getFirstSet(hashMap);
+		follow = Firest_Follow.getFollow(first,hashMap); //FlowFirst.getFollowSet(hashMap);
 		
-		
-		hashMap.put("e", t1);
-		hashMap.put("ex", t2);
-		hashMap.put("t", t3);
-		hashMap.put("tx", t4);
-		hashMap.put("f", t5);
-		
-		first = test.getFirest(hashMap);//FlowFirst.getFirstSet(hashMap);
-		follow = test.getFollow(first, hashMap); //FlowFirst.getFollowSet(hashMap);
 //		String s[] = test.getAfterExe(GrammarManager.split("t e"),"e","e");
 //		System.out.println(s[0]+"   "+s[1]);
 
@@ -141,6 +142,7 @@ public class LlParsing {
 
 
 
+	
 
 
 

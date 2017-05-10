@@ -15,7 +15,7 @@ import java.util.Map;
  *
  * @author moroclash
  */
-public class test {
+public class Firest_Follow {
 
 	/**
 	 * this function get first of nonTermina
