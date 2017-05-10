@@ -187,6 +187,9 @@ public void parsingTable( LinkedHashMap<String, ArrayList<String>> first,
 	first.put("E", firstT);
 	first.put("E`", firstT);
 
+	
+	follow.put("E`", firstT);
+
 	ArrayList eRule = new ArrayList();
 	eRule.add("T E`");
 	ArrayList e2Rule = new ArrayList();
@@ -197,6 +200,7 @@ public void parsingTable( LinkedHashMap<String, ArrayList<String>> first,
 
 	
 System.out.println("First " + first);
+System.out.println("Follow" + follow);
 
 	// FOR TESTING ONLEY
 
@@ -340,17 +344,29 @@ for (String currentNonTerminal: rules.keySet()) {
 			// If the the rule is epsilon
 			// We'll get the first of the current non-terminal
 			// Put 
-			
+			for (int j = 0; j < follow.get(currentNonTerminal).size(); j++){
+
+			terminal = follow.get(currentNonTerminal).get(j);
+			// Getting the index of the terminal in the table (2D Array)
+			terminalIndex = indicesOfNonTerminal_Columns.get(terminal);
+
+			// 4* Addin the Rule in the Cell
+			table[nonTerminalIndex][terminalIndex]
+				= currentNonTerminal + " -> " + rules.get(currentNonTerminal).get(i);
+
+System.out.println("Tabel[][] -> "+ table[nonTerminalIndex][terminalIndex]);		
+		}
+		// Rest indices for the next nonTerminal round
+		terminalIndex = 0;
+		nonTerminalIndex = 0;
+
+
+
 
 		} else {
 
 		// 1* getting the first symbol
 		firstSymbol = returnFirst(rules.get(currentNonTerminal).get(i));
-		// Reset
-		letter = 0;
-		firstCount = 0;
-		letter = 0;
-		innerWhile = 0;
 //System.out.println("First Symbol "+ firstSymbol);
 
 		// 2* Getting the first of the firstSymbol
@@ -372,17 +388,18 @@ System.out.println("currentNonTerminal " + currentNonTerminal);
 			= currentNonTerminal + " -> " + rules.get(currentNonTerminal).get(i);
 
 		}
-		else {
+		else // the symbol is terminal -> get its index directly
+		{
 System.out.println("377 FirstELSE" + firstSymbol);
 		for (int j = 0; j < first.get(firstSymbol).size(); j++){
 
-		terminal = first.get(firstSymbol).get(j);
-		// Getting the index of the terminal in the table (2D Array)
-		terminalIndex = indicesOfNonTerminal_Columns.get(terminal);
+			terminal = first.get(firstSymbol).get(j);
+			// Getting the index of the terminal in the table (2D Array)
+			terminalIndex = indicesOfNonTerminal_Columns.get(terminal);
 
-		// 4* Addin the Rule in the Cell
-		table[nonTerminalIndex][terminalIndex]
-			= currentNonTerminal + " -> " + rules.get(currentNonTerminal).get(i);
+			// 4* Addin the Rule in the Cell
+			table[nonTerminalIndex][terminalIndex]
+				= currentNonTerminal + " -> " + rules.get(currentNonTerminal).get(i);
 
 System.out.println("Tabel[][] -> "+ table[nonTerminalIndex][terminalIndex]);		
 		}
@@ -394,7 +411,7 @@ System.out.println("Tabel[][] -> "+ table[nonTerminalIndex][terminalIndex]);
 
 
 		}
-		}
+		} // not epsilon
 
 
 
