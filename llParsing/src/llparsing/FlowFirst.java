@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class FlowFirst {
 
-	public LinkedHashMap<String, ArrayList<String>> getFirstSet(LinkedHashMap<String, ArrayList<String>> grammers) {
+	public static LinkedHashMap<String, ArrayList<String>> getFirstSet(LinkedHashMap<String, ArrayList<String>> grammers) {
 		int changeFlag = 1;
 		LinkedHashMap<String, ArrayList<String>> firstset = new LinkedHashMap<>();
 		ArrayList<String> first = new ArrayList<>();
@@ -117,7 +117,7 @@ public class FlowFirst {
 
 	}
 
-	public LinkedHashMap<String, ArrayList<String>> getFollowSet(LinkedHashMap<String, ArrayList<String>> grammers) {
+	public static LinkedHashMap<String, ArrayList<String>> getFollowSet(LinkedHashMap<String, ArrayList<String>> grammers) {
 		int changeFlag = 1;
 		LinkedHashMap<String, ArrayList<String>> folowSets = new LinkedHashMap<>();
 		LinkedHashMap<String, ArrayList<String>> ferstsets = getFirstSet(grammers);

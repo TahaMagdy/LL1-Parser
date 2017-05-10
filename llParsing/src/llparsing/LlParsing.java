@@ -33,19 +33,35 @@ public class LlParsing {
 	 */
 	public static void main(String[] args) throws IOException {
 
-		LinkedHashMap<String, ArrayList<String>> hashMap = new LinkedHashMap();
+		LinkedHashMap<String, ArrayList<String>> hashMap = new LinkedHashMap(),first,follow;
 
-		GrammarManager x = new GrammarManager();
-		hashMap =  (LinkedHashMap<String, ArrayList<String>>) x.grammar();
-                AmbegoutyManager.RemoveLeftReqursion(hashMap);
-		AmbegoutyManager.deletLeftFactoring(hashMap);
+//		GrammarManager x = new GrammarManager();
+//		hashMap =  (LinkedHashMap<String, ArrayList<String>>) x.grammar();
+//                AmbegoutyManager.RemoveLeftReqursion(hashMap);
+//		AmbegoutyManager.deletLeftFactoring(hashMap);
 //		hashMap.forEach((key,value)->{System.out.println("key :  "+ key);value.forEach(e->{System.out.println("   value   :  " +e);});});
 		
+		ArrayList<String> t1 =  new ArrayList<>();
+		t1.add("t ex"); 
+		ArrayList<String> t2 =  new ArrayList<>();
+		t1.add("+ t ex"); 
 		
+		t1.add("em"); 
+		ArrayList<String> t3 =  new ArrayList<>();
+		t1.add("+"); 
+		t1.add("-"); 
+		
+		
+		hashMap.put("e", t1);
+		hashMap.put("ex", t2);
+		hashMap.put("t", t3);
+		
+		first = FlowFirst.getFirstSet(hashMap);
+//		follow = FlowFirst.getFollowSet(hashMap);
+		
+		first.forEach((key,value)->{System.out.print("key  :"+key+"  {");value.forEach(e->{System.out.print(" "+e+"  ");});System.out.print(" }");System.out.println("");});
 		 
-					String []exeS = {"t1","t2","t3","t4"};
-					for(int i=exeS.length-1;i>=0;i--)
-						System.out.println(exeS[i]);
+		
 
 	}
 
