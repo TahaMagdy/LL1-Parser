@@ -117,12 +117,9 @@ public class test {
 		HashSet<String> follow,
 		LinkedHashMap<String, ArrayList<String>> grammar,
 		LinkedHashMap<String, ArrayList<String>> firests) {
-		LinkedHashMap<String, String[]> nonTerminalPosition = getNonTerminalPositions(grammar, nonTerminal);
-		for (Map.Entry<String, String[]> map : nonTerminalPosition.entrySet()) {
-			String key = map.getKey();
-			String[] value = map.getValue();
+		ArrayList<String[]> nonTerminalPosition = getNonTerminalPositions(grammar, nonTerminal);
+		for (String[] value : nonTerminalPosition) {
 			if (value[1].compareTo("0") == 0) {
-				
 				if(firests.containsKey(value[0]))
 				{
 					for(String v : firests.get(value[0]))
@@ -133,8 +130,7 @@ public class test {
 						}
 						else
 						{
-							String []emfirest = getAfterExe(GrammarManager.split(value[2]), value[0], key, value[2]);
-							
+							String []emfirest = getAfterExe(GrammarManager.split(value[2]), value[0], value[3], value[2]);						
 							if (returnFollows.containsKey(emfirest[0])) {
 								follow.addAll(returnFollows.get(emfirest[0]));
 							}
@@ -177,9 +173,9 @@ public class test {
 	 * @return LinkedHashMap that have key : nonTerminalName that have this
 	 * nonTerminal in his rules value : exe after this nonTerminal
 	 */
-	public static LinkedHashMap<String, String[]> getNonTerminalPositions(LinkedHashMap<String, ArrayList<String>> grammar, String nonTerminal) {
+	public static ArrayList<String[]> getNonTerminalPositions(LinkedHashMap<String, ArrayList<String>> grammar, String nonTerminal) {
 		//this LinkedHashMap that will return ...it is empty now
-		LinkedHashMap<String, String[]> Positions = new LinkedHashMap<>();
+		ArrayList<String[]> Positions = new ArrayList<>();
 		//loop on all nonTerminals
 		for (Map.Entry<String, ArrayList<String>> map : grammar.entrySet()) {
 			//arraList of  Rules
@@ -198,7 +194,7 @@ public class test {
 				if (flage) {
 					//if have ...will get firest exe after it
 					String[] afterExe = getAfterExe(exes, nonTerminal, map.getKey(),rule);
-					Positions.put(map.getKey(), afterExe);
+					Positions.add( afterExe);
 				}
 			}
 		}
@@ -210,17 +206,19 @@ public class test {
 	 *
 	 */
 	public static String[] getAfterExe(String[] exes, String exe, String nonTerminal,String rule) {
-		String[] retString = new String[3];
+		String[] retString = new String[4];
 		for (int i = 0; i < exes.length; i++) {
 			if (exe.compareTo(exes[i]) == 0) {
 				try {
 					retString[0] = exes[i + 1];
 					retString[1] = "0";
 					retString[2] = rule;
+					retString[3] = nonTerminal;
 				} catch (Exception e) {
 					retString[0] = nonTerminal;
 					retString[1] = "1";
 					retString[2] = rule;
+					retString[3] = nonTerminal;
 				}
 				break;
 			}
