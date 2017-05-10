@@ -33,7 +33,8 @@ public class LlParsing {
 	 */
 	public static void main(String[] args) throws IOException {
 
-		LinkedHashMap<String, ArrayList<String>> hashMap = new LinkedHashMap(),first,follow;
+		LinkedHashMap<String, ArrayList<String>> hashMap = new LinkedHashMap(),first;
+		LinkedHashMap<String, HashSet<String>> follow = new LinkedHashMap();
 
 //		GrammarManager x = new GrammarManager();
 //		hashMap =  (LinkedHashMap<String, ArrayList<String>>) x.grammar();
@@ -42,25 +43,37 @@ public class LlParsing {
 //		hashMap.forEach((key,value)->{System.out.println("key :  "+ key);value.forEach(e->{System.out.println("   value   :  " +e);});});
 		
 		ArrayList<String> t1 =  new ArrayList<>();
-		t1.add("t ex"); 
+		t1.add("t ex");
 		ArrayList<String> t2 =  new ArrayList<>();
-		t1.add("+ t ex"); 
-		
-		t1.add("em"); 
+		t2.add("+ t ex");
+		t2.add("em");
 		ArrayList<String> t3 =  new ArrayList<>();
-		t1.add("+"); 
-		t1.add("-"); 
+		t3.add("f tx");
+		ArrayList<String> t4 =  new ArrayList<>();
+		t4.add("* f tx");
+		t4.add("em");
+		ArrayList<String> t5 =  new ArrayList<>();
+		t5.add("id");
+		t5.add("( e )");
+		
 		
 		
 		hashMap.put("e", t1);
 		hashMap.put("ex", t2);
 		hashMap.put("t", t3);
+		hashMap.put("tx", t4);
+		hashMap.put("f", t5);
 		
-		first = FlowFirst.getFirstSet(hashMap);
-//		follow = FlowFirst.getFollowSet(hashMap);
-		
-		first.forEach((key,value)->{System.out.print("key  :"+key+"  {");value.forEach(e->{System.out.print(" "+e+"  ");});System.out.print(" }");System.out.println("");});
+		first = test.getFirest(hashMap);//FlowFirst.getFirstSet(hashMap);
+		follow = test.getFollow(first, hashMap); //FlowFirst.getFollowSet(hashMap);
+//		String s[] = test.getAfterExe(GrammarManager.split("t e"),"e","e");
+//		System.out.println(s[0]+"   "+s[1]);
+
+//		LinkedHashMap<String,String[]> tt = test.getNonTerminalPositions(hashMap, "t");
+//		tt.forEach((k,v)->{System.out.println("k: " +k+ "  v :"+v[0]+"  "+v[1]);});
+		follow.forEach((key,value)->{System.out.print("key  :"+key+"  {");value.forEach(e->{System.out.print(" "+e+"  ");});System.out.print(" }");System.out.println("");});
 		 
+		
 		
 
 	}
