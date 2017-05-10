@@ -32,6 +32,27 @@ public class LlParsing {
 	 */
 	public static void main(String[] args) throws IOException {
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+/*
 		LinkedHashMap<String, ArrayList<String>> fisrt = new LinkedHashMap();
 		LinkedHashMap<String, ArrayList<String>> follow = new LinkedHashMap();
 		LinkedHashMap<String, ArrayList<String>> rules = new LinkedHashMap();
@@ -39,10 +60,10 @@ public class LlParsing {
 		GrammarManager x = new GrammarManager();
 //		x.grammar();
 		x.parsingTable(fisrt, follow, rules);
-
+/*
 
 		
-		//System.out.println(GrammarManager.returnFirst("E` New"));
+//System.out.println(GrammarManager.returnFirst("E` New"));
 
 
 /*
