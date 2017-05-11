@@ -18,6 +18,7 @@ import java.util.Map;
 public class Firest_Follow {
 
 	/**
+	 * @moroclash
 	 * this function get first of nonTermina
 	 *
 	 * @param grammar : this is a grammar that will extract first
@@ -42,6 +43,7 @@ public class Firest_Follow {
 	}
 
 	/**
+	 * @moroclash
 	 * this helper function that will use to get first using recursion
 	 * Algorithm
 	 *
@@ -85,6 +87,7 @@ public class Firest_Follow {
 	}
 
 	/**
+	 * @moroclash
 	 * this function use to get follow of nonterminals
 	 * @param grammar : this is a original grammar of BNF
 	 * @param firests : is a LinkedHashMap of nonTerminals and his firsts
@@ -211,6 +214,7 @@ public class Firest_Follow {
 	}
 
 	/**
+	 * @moroclash
 	 * helper function that used to get nonTerminal Position and his exe
 	 * after his
 	 *
@@ -256,6 +260,7 @@ public class Firest_Follow {
 	}
 
 	/**
+	 * @moroclash
 	 * helper function that use to get exe that found after specific exe
 	 * @param exes : this is a spite Rule
 	 * @param exe : this is a exe that will get firest exe after it
