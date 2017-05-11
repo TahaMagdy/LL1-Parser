@@ -30,6 +30,7 @@ public class GrammarManager {
 
 
 // @Taha
+	// Getting the grammar from the file (Ambig..)
 public LinkedHashMap<String, ArrayList<String>> grammar() throws FileNotFoundException, IOException {
 
 
@@ -160,8 +161,14 @@ count++; // Get the next line
 return hashMap;
 } // end grammar()
 
-
-
+private static LinkedHashMap<String, ArrayList<String>> converter (LinkedHashMap<String, HashSet<String>> OLD ){
+	LinkedHashMap<String, ArrayList<String>> NEW = new LinkedHashMap<>();
+	OLD.forEach((k,v)->{
+		ArrayList<String> ta = new ArrayList<>(v);
+		NEW.put(k, ta);
+	});
+	return NEW;
+}
 
 
 
@@ -173,34 +180,35 @@ return hashMap;
 // 2* follow, LinkedHashMap of (key is non-terminal, value is arraylist of rule symbol)
 // 3* unambiguous rules
 // 
-// What is epsilon?! 
-public static void parsingTable( LinkedHashMap<String, ArrayList<String>> first,
-			  LinkedHashMap<String, ArrayList<String>> follow,
+// epsilon is "em"e
+public static void parsingTable( LinkedHashMap<String, HashSet<String>> firstHash,
+			  LinkedHashMap<String, HashSet<String>> followHash,
 			  LinkedHashMap<String, ArrayList<String>>  rules ) 
 {
 
+	LinkedHashMap<String,ArrayList<String>> first = converter(firstHash);
+	LinkedHashMap<String,ArrayList<String>> follow = converter(followHash);
 	// FOR TESTING ONLEY
-	ArrayList<String> firstT = new ArrayList();
-	firstT.add("(");
-	firstT.add("id");
-	first.put("T", firstT );
-	first.put("E", firstT);
-	first.put("E`", firstT);
-
-	
-	follow.put("E`", firstT);
-
-	ArrayList eRule = new ArrayList();
-	eRule.add("T E`");
-	ArrayList e2Rule = new ArrayList();
-	e2Rule.add("+ T E`");
-	e2Rule.add("em");
-	rules.put("E", eRule);
-	rules.put("E`", e2Rule);
-
-	
-System.out.println("First " + first);
-System.out.println("Follow" + follow);
+//	ArrayList<String> firstT = new ArrayList();
+//	firstT.add("(");
+//	firstT.add("id");
+//	first.put("T", firstT );
+//	first.put("E", firstT);
+//	first.put("E`", firstT);
+//
+//	
+//	follow.put("E`", firstT);
+//
+//	ArrayList eRule = new ArrayList();
+//	eRule.add("T E`");
+//	ArrayList e2Rule = new ArrayList();
+//	e2Rule.add("+ T E`");
+//	e2Rule.add("em");
+//	rules.put("E", eRule);
+//	rules.put("E`", e2Rule);
+//
+System.out.println("First is  " + first);
+System.out.println("Follow is " + follow);
 
 	// FOR TESTING ONLEY
 
@@ -209,7 +217,7 @@ System.out.println("Follow" + follow);
 
 	
 // This will contain all symbols
-Set set = new HashSet();
+Set<String> set = new HashSet<String>();
 // Getting all symbols (Terminals&NonTerminals)
 ///////////////////////////////////////////////
 // I'm getting all the symbols from the rules LinkedHashMap
@@ -228,16 +236,25 @@ for (String keyOuter : rules.keySet()) {
 	} // end symbols from rules
 
 	
-	for (String keyInner : first.keySet()) {
+	for (String keyInnerFi : first.keySet()) {
 
-	for (int x = 0; x < first.get(keyInner).size(); x++ ){
+	for (int x = 0; x < first.get(keyInnerFi).size(); x++ ){
 
 		// Adding every element in the rule
 		// into a set
-		set.add(first.get(keyInner).get(x));
+		set.add(first.get(keyInnerFi).get(x));
 	}
 	}
 
+	for (String keyInnerFo : follow.keySet()) {
+
+	for (int x = 0; x < follow.get(keyInnerFo).size(); x++ ){
+
+		// Adding every element in the rule
+		// into a set
+		set.add(follow.get(keyInnerFo).get(x));
+	}
+	}
 
 
 	
@@ -262,8 +279,8 @@ System.out.println("THE ALL set >> " + set);
 // * the First Only have noterminals on the left hand side
 // * put all symbols in a set
 // * AllSet - Fisrt = Terminals
-Set nonTerminalSet = new HashSet();
-	for (String key : first.keySet()) {
+Set<String> nonTerminalSet = new HashSet<String>();
+	for (String key : first.keySet() ) {
 
 		for (int x = 0; x < first.get(key).size(); x++ ){
 
@@ -274,35 +291,43 @@ Set nonTerminalSet = new HashSet();
 		}
 	}  // end separating terminals and non-terminals
 
-System.out.println("nonTerminals (Raws)->" + nonTerminalSet );
-System.out.println("terminals    (Coln)->" + set);
+System.out.println("nonTerminals_Set (Raws)->" + nonTerminalSet );
+System.out.println("terminals_Set    (Coln)->" + set);
 
 
 // These two are used to control the assigning in the parsing table
 // maps a (terminal/nonterminal) to an index
-LinkedHashMap<String, Integer> indicesOfNonTerminal_Columns = new LinkedHashMap();
-LinkedHashMap<String, Integer> indicesOfTerminal_Rows = new LinkedHashMap();
+LinkedHashMap<String, Integer> indicesOfNonTerminal_Rows = new LinkedHashMap();
+LinkedHashMap<String, Integer> indicesOfTerminal_Columns = new LinkedHashMap();
 
 
 // Building indices controllers
 Iterator<String> iteratorTerminal = set.iterator();
 int index = 0;
-while ( iteratorTerminal.hasNext() ){
-	indicesOfNonTerminal_Columns.put( iteratorTerminal.next(), index);
+String currentterminal = "";
+for(String ss: set)
+{
+	currentterminal = ss;
+	indicesOfTerminal_Columns.put( ss, index);
+	System.out.println("Terminals Index " + ss
+		+  " -> " + index);
 	index++;
 }
-indicesOfNonTerminal_Columns.put("$", index); // adding $ to the terminals
-Iterator<String> iteratorNonTerminal = nonTerminalSet.iterator();
+indicesOfTerminal_Columns.put("$", index); // adding $ to the terminals
+
 index = 0;
-while ( iteratorNonTerminal.hasNext() ){
-	indicesOfTerminal_Rows.put( iteratorNonTerminal.next(), index);
+for(String ss : nonTerminalSet){
+		
+	currentterminal = ss;	
+	indicesOfNonTerminal_Rows.put( ss, index);
+	System.out.println("NonTerminal Index " +  ss +  " -> " + index);
+	
 	index++;
 }
 
-System.out.println("TerminalSet " + set);
-System.out.println("NonTerminalSet " + nonTerminalSet);
-System.out.println("IndicesRows " + indicesOfTerminal_Rows);
-System.out.println("IndicesCols " + indicesOfNonTerminal_Columns);
+
+System.out.println("IndicesRows " + indicesOfNonTerminal_Rows);
+System.out.println("IndicesCols " + indicesOfTerminal_Columns);
 
 
 
@@ -313,7 +338,7 @@ int tableColm = set.size();
 
 
 //int[ ][ ] a = new int[2][4];  // Two rows and four columns.
-String[][] table = new String[tableRows][tableColm];
+String[][] table = new String[tableRows+1][tableColm+1];
 
 
 
@@ -326,19 +351,29 @@ int innerWhile = 0;
 String terminal  = "";
 int terminalIndex = 0;
 int nonTerminalIndex = 0;
+// Loop Over the hole grammar (nonTerminals)
+//indicesOfTerminal_Rows.forEach((k,v)->{System.out.println("key : " + k);System.out.println("int : "+v);});
 for (String currentNonTerminal: rules.keySet()) {
 
+//	System.out.println(indicesOfTerminal_Rows.containsKey(currentNonTerminal));
+//	System.out.println("curret KEY " + currentNonTerminal);
+	
+	
 // rules.get(currentNonTerminal) is a list of the rules for the currenNonTerminal 
 //System.out.println( currentNonTerminal + " -- " + rules.get(currentNonTerminal));
 
+	System.out.print("*********************: " + indicesOfNonTerminal_Rows.containsKey(currentNonTerminal)+"    "+currentNonTerminal);
+nonTerminalIndex = indicesOfNonTerminal_Rows.get(currentNonTerminal);
+	System.out.println("    "  + nonTerminalIndex);
 	// Looping over the nonTerminal rules
 	for (int i = 0; i < rules.get(currentNonTerminal).size(); i++)
 	{
-
-
-		// if the rule is epsilon
-		// current rule for the current nonTerminal rules.get(currentNonTerminal).get(i) 
-		if (rules.get(currentNonTerminal).get(i).equals("em")){
+//
+//		System.out.println("llllllllllllllllllllll : i="+i+"         "+ rules.get(currentNonTerminal).size());
+//
+//		// if the rule is epsilon
+//		// current rule for the current nonTerminal rules.get(currentNonTerminal).get(i) 
+		if (rules.get(currentNonTerminal).get(i).compareTo("em") == 0){
 			
 
 			// If the the rule is epsilon
@@ -348,7 +383,7 @@ for (String currentNonTerminal: rules.keySet()) {
 
 			terminal = follow.get(currentNonTerminal).get(j);
 			// Getting the index of the terminal in the table (2D Array)
-			terminalIndex = indicesOfNonTerminal_Columns.get(terminal);
+			terminalIndex = indicesOfTerminal_Columns.get(terminal);
 
 			// 4* Addin the Rule in the Cell
 			table[nonTerminalIndex][terminalIndex]
@@ -363,54 +398,61 @@ System.out.println("Tabel[][] -> "+ table[nonTerminalIndex][terminalIndex]);
 
 
 
-		} else {
-
+		}/////////////////// 
+		else {
+				
 		// 1* getting the first symbol
 		firstSymbol = returnFirst(rules.get(currentNonTerminal).get(i));
-//System.out.println("First Symbol "+ firstSymbol);
+System.out.println("First Symbol "+ firstSymbol);
+//
+//		// 2* Getting the first of the firstSymbol
+//		// 3* Adding the rule into the (NonTerminalRow, TerminalColumns)
+//
+//
+//
+//		// Gettin the index of the non-terminal in the table (2D Array)
+//		// if firstSymbol is terminal
+//		// then put it in the terminal coulmn
+		System.out.println("the Current non (NEED_INDEX) >>>>> " + currentNonTerminal);
+			System.out.println(" (NEED_INDEX) >>>>> " + indicesOfNonTerminal_Rows);
 
-		// 2* Getting the first of the firstSymbol
-		// 3* Adding the rule into the (NonTerminalRow, TerminalColumns)
-System.out.println("359 firstSymbol " + firstSymbol);
-System.out.println("currentNonTerminal " + currentNonTerminal);
-
-
-
-		// Gettin the index of the non-terminal in the table (2D Array)
-		// if firstSymbol is terminal
-		// then put it in the terminal coulmn
-		System.out.println("بيضرب هنا, " + currentNonTerminal);
-		nonTerminalIndex = indicesOfTerminal_Rows.get(currentNonTerminal);
 		if ( set.contains(firstSymbol)) {
-
-			terminalIndex = indicesOfNonTerminal_Columns.get(firstSymbol);
+			
+			
+			terminalIndex = indicesOfTerminal_Columns.get(firstSymbol);
+			
+			try {
 			table[nonTerminalIndex][terminalIndex]
 			= currentNonTerminal + " -> " + rules.get(currentNonTerminal).get(i);
-
-		}
-		else // the symbol is terminal -> get its index directly
-		{
-System.out.println("377 FirstELSE" + firstSymbol);
-		for (int j = 0; j < first.get(firstSymbol).size(); j++){
-
-			terminal = first.get(firstSymbol).get(j);
-			// Getting the index of the terminal in the table (2D Array)
-			terminalIndex = indicesOfNonTerminal_Columns.get(terminal);
-
-			// 4* Addin the Rule in the Cell
-			table[nonTerminalIndex][terminalIndex]
-				= currentNonTerminal + " -> " + rules.get(currentNonTerminal).get(i);
-
-System.out.println("Tabel[][] -> "+ table[nonTerminalIndex][terminalIndex]);		
-		}
-		// Rest indices for the next nonTerminal round
-		terminalIndex = 0;
-		nonTerminalIndex = 0;
-
-
-
-
-		}
+			} catch(Exception e) {
+			
+				table[nonTerminalIndex][terminalIndex] = "sym";
+				
+			}
+		} //  firstSymbol is terinal
+//		else // the symbol is terminal -> get its index directly
+//		{
+//System.out.println("377 FirstELSE" + firstSymbol);
+//		for (int j = 0; j < first.get(firstSymbol).size(); j++){
+//
+//			terminal = first.get(firstSymbol).get(j);
+//			// Getting the index of the terminal in the table (2D Array)
+//			terminalIndex = indicesOfNonTerminal_Columns.get(terminal);
+//
+//			// 4* Addin the Rule in the Cell
+//			table[nonTerminalIndex][terminalIndex]
+//				= currentNonTerminal + " -> " + rules.get(currentNonTerminal).get(i);
+//
+//System.out.println("Tabel[][] -> "+ table[nonTerminalIndex][terminalIndex]);		
+//		}
+//		// Rest indices for the next nonTerminal round
+//		terminalIndex = 0;
+//		nonTerminalIndex = 0;
+//
+//
+//
+//
+//		}
 		} // not epsilon
 
 

@@ -253,7 +253,7 @@ public class AmbegoutyManager {
 				for (int i = 0; i < rules.size(); i++) {
 					rules.set(i, rules.get(i) + " " + name);
 				}
-				Newrules.add("epslon");
+				Newrules.add("em");
 				Grammernew.put(name, Newrules);
 			}
 		}

@@ -10,10 +10,12 @@ AccessModifiers-Type : public
 | Private
 
 
-field-decl : type # id , field-decl
+field-decl : field-decl , type # id 
 | type # id [ intConst ]
 | type # id = constant
 | type # id
+
+
 
 method-decl : type # id ( field-decl
 | em ) block
@@ -56,13 +58,18 @@ Respondwith-Stmt : BackedValue # Expression ^
 
 terminatethis _Statement : TerminateThisNow;
 
+xprt : xprt bin-op expr | expr
+
 expr : id
 | id [ expr ]
 | method-call
 | constant
-| expr bin-op expr
 | ! expr
 | ( expr )
+
+
+
+
 
 bin-op : arith-op
 | rel-op

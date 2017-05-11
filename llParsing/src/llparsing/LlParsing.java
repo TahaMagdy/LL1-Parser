@@ -36,42 +36,53 @@ public class LlParsing {
 		LinkedHashMap<String, ArrayList<String>> hashMap = new LinkedHashMap();
 		LinkedHashMap<String, HashSet<String>> follow = new LinkedHashMap(),first;
 		GrammarManager x = new GrammarManager();
-		hashMap =  (LinkedHashMap<String, ArrayList<String>>) x.grammar();
+		
+		ArrayList<String> t1 =  new ArrayList<>();
+		t1.add("e + t");
+		t1.add("t");
+		ArrayList<String> t2 =  new ArrayList<>();
+		t2.add("t * f");
+		t2.add("f");
+		ArrayList<String> t3 =  new ArrayList<>();
+		t3.add("id");
+		t3.add("( e )");
+
+		
+		
+		
+		hashMap.put("e", t1);
+		hashMap.put("t", t2);
+		hashMap.put("f", t3);
+		
+		
+//		hashMap =  (LinkedHashMap<String, ArrayList<String>>) x.grammar();
+		
+		
                 AmbegoutyManager.RemoveLeftReqursion(hashMap);
-		AmbegoutyManager.deletLeftFactoring(hashMap);
+		
+//		AmbegoutyManager.deletLeftFactoring(hashMap);
+		
+		
 		hashMap.forEach((key,value)->{System.out.println("key :  "+ key);value.forEach(e->{System.out.println("   value   :  " +e);});});
 		
-//		ArrayList<String> t1 =  new ArrayList<>();
-//		t1.add("t ex");
-//		ArrayList<String> t2 =  new ArrayList<>();
-//		t2.add("+ t ex");
-//		t2.add("em");
-//		ArrayList<String> t3 =  new ArrayList<>();
-//		t3.add("f tx");
-//		ArrayList<String> t4 =  new ArrayList<>();
-//		t4.add("* f tx");
-//		t4.add("em");
-//		ArrayList<String> t5 =  new ArrayList<>();
-//		t5.add("id");
-//		t5.add("( e )");
-//		
-//		
-//		
-//		hashMap.put("e", t1);
-//		hashMap.put("ex", t2);
-//		hashMap.put("t", t3);
-//		hashMap.put("tx", t4);
-//		hashMap.put("f", t5);
 		
-		first = Firest_Follow.getFirest(hashMap);//FlowFirst.getFirstSet(hashMap);
-		follow = Firest_Follow.getFollow(first,hashMap); //FlowFirst.getFollowSet(hashMap);
+		
+//		first = Firest_Follow.getFirest(hashMap);//FlowFirst.getFirstSet(hashMap);
+//		
+//		follow = Firest_Follow.getFollow(first,hashMap); //FlowFirst.getFollowSet(hashMap);
+//		
+//		
+//		GrammarManager.parsingTable(first, follow, hashMap);
+//		
+//		ll1Matching.LL1Matching(new Stack<>());
 		
 //		String s[] = test.getAfterExe(GrammarManager.split("t e"),"e","e");
 //		System.out.println(s[0]+"   "+s[1]);
 
 //		LinkedHashMap<String,String[]> tt = test.getNonTerminalPositions(hashMap, "t");
 //		tt.forEach((k,v)->{System.out.println("k: " +k+ "  v :"+v[0]+"  "+v[1]);});
-		follow.forEach((key,value)->{System.out.print("key  :"+key+"  {");value.forEach(e->{System.out.print(" "+e+"  ");});System.out.print(" }");System.out.println("");});
+//		first.forEach((key,value)->{System.out.print("firest key  :"+key+"  {");value.forEach(e->{System.out.print(" "+e+"  ");});System.out.print(" }");System.out.println("");});
+//		follow.forEach((key,value)->{System.out.print("follow key  :"+key+"  {");value.forEach(e->{System.out.print(" "+e+"  ");});System.out.print(" }");System.out.println("");});
 		 
 		
 		
@@ -135,7 +146,7 @@ public class LlParsing {
 		AmbegoutyManager.RemoveLeftReqursion(gram);
 //		AmbegoutyManager.deletLeftFactoring(gram);
 //		System.out.println(GrammarManager.removeFirestExe(t1.get(0)));
-		gram.forEach((key,value)->{System.out.println(key);System.out.print("->");value.forEach(e->{System.out.println(e);});System.out.println("********************************");});
+//		gram.forEach((key,value)->{System.out.println(key);System.out.print("->");value.forEach(e->{System.out.println(e);});System.out.println("********************************");});
 	}
 
 
